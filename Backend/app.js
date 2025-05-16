@@ -10,9 +10,10 @@ const profile=require('./routes/ProfileRoutes/profile.js')
 const product=require('./routes/MarketRoutes/productRoutes.js')
 const order=require('./routes/MarketRoutes/order.js')
 const payment=require('./routes/MarketRoutes/paymentRoutes.js')
-
+const connectDatabase = require('./config/database');
+connectDatabase();
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.FRONTEND_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
   }));

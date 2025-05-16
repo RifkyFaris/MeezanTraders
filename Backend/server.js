@@ -1,8 +1,4 @@
-const app=require("./app");
-const connectDatabase = require("./config/database");
+const app = require('./app');
+const serverless = require('serverless-http');
 
-connectDatabase();
-port=process.env.port||8000
-app.listen(port,()=>{
-    console.log(`server listening to port ${port}`)
-})
+module.exports = serverless(app);
