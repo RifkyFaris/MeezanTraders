@@ -31,7 +31,7 @@ const Shop = () => {
   
   return (
     <Fragment>
-      <MetaData title={"Buy Quality Parts"}/>
+      
     <div className='container1'>
       
       

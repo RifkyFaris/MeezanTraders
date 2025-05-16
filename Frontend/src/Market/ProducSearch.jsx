@@ -31,7 +31,6 @@ const ProducSearch = () => {
   },[error,currentPage,dispatch,keyword,priceChanged,category])
   return (
     <Fragment>
-      <MetaData title={"Buy Quality Parts"}/>
     <div className='container1'>
       
       

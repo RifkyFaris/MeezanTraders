@@ -64,7 +64,6 @@ const TowingRegister = () => {
 
   return (
     <Fragment>
-      <MetaData title={'User Register'}/>
     <div className='container1'>
       
       <div className="register">

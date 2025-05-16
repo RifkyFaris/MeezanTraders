@@ -33,7 +33,6 @@ const Login = () => {
 
   return (
     <Fragment>
-      <MetaData title={'Login'}/>
     <div className='container1'>
       
       
