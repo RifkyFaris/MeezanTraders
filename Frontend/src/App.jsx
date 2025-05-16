@@ -1,5 +1,5 @@
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
-import {HelmetProvider} from 'react-helmet-async'
+
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import Login from './Profile/Login.jsx'
@@ -61,7 +61,6 @@ function App() {
 
   return (
     <Router>
-      <HelmetProvider>
         <Header/>
         <ToastContainer />
         
@@ -110,7 +109,7 @@ function App() {
           <Route path='/admin/user/list' element={<ProtectedRoute isAdmin={true}><UserList/></ProtectedRoute> } />
         </Routes>
         <Footer />
-      </HelmetProvider>
+      
     </Router>
   )
 }
