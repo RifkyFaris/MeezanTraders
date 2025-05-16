@@ -5,7 +5,6 @@ import { Link,useNavigate } from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
 import {washRegister,clearAuthError} from './actions/userActions.jsx'
 import {toast} from 'react-toastify'
-import MetaData from '../components/MetaData'
 
 const CarWashRegister = () => {
   const [userData,setUserData]=useState({

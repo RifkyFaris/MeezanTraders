@@ -1,6 +1,5 @@
 import {Fragment,useEffect,useState} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
-import MetaData from "../components/MetaData"
 import { Link } from 'react-router-dom'
 import { getProducts } from './actions/productActions'
 import Product from './Product'

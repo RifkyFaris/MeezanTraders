@@ -1,6 +1,5 @@
 import React,{Fragment,useEffect,useState}  from 'react'
 import {useDispatch,useSelector} from 'react-redux'
-import MetaData from "../components/MetaData.jsx"
 import {getProducts} from './actions/productActions.jsx'
 import {toast} from 'react-toastify'
 import Pagination from 'react-js-pagination'

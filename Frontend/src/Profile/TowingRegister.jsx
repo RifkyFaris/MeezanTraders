@@ -5,7 +5,6 @@ import { Link,useNavigate } from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
 import {towingRegister,clearAuthError} from './actions/userActions.jsx'
 import {toast} from 'react-toastify'
-import MetaData from '../components/MetaData'
 
 const TowingRegister = () => {
   const [userData,setUserData]=useState({

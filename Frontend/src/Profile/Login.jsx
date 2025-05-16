@@ -1,7 +1,6 @@
 import React,{Fragment,useEffect,useState} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import {toast} from 'react-toastify'
-import MetaData from '../components/MetaData.jsx'
 import './Login.css'
 import '../components/header.css'
 import { Link,useLocation,useNavigate } from 'react-router-dom'
