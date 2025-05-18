@@ -31,7 +31,7 @@ export const createNewProduct=productData=>async(dispatch)=>{
     try {
         dispatch(newProductRequest())
         const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-        const { data }  =  await axios.post(`/api/product/supplier/product/new`,productData,config);
+        const { data }  =  await axios.post(`https://meezantraders.vercel.app/api/product/supplier/product/new`,productData,config);
         dispatch(newProductSuccess(data))
     } catch (error) {
         dispatch(newProductFail(error.response.data.message))
@@ -42,7 +42,7 @@ export const getProducts = (keyword, price, category, rating, currentPage) => as
 
     try {  
         dispatch(productsRequest()) 
-        let link = `/api/product/products?page=${currentPage}`;
+        let link = `https://meezantraders.vercel.app/api/product/products?page=${currentPage}`;
         
         if(keyword) {
             link += `&keyword=${keyword}`
@@ -69,7 +69,7 @@ export const getProducts = (keyword, price, category, rating, currentPage) => as
 export const getProduct=id=>async(dispatch)=>{
     try {
         dispatch(productRequest())
-        const {data} =await axios.get(`/api/product/product/${id}`)
+        const {data} =await axios.get(`https://meezantraders.vercel.app/api/product/product/${id}`)
         dispatch(productSuccess(data))
     } catch (error) {
         dispatch(productFail(error.response?.data?.message || error.message))
@@ -83,7 +83,7 @@ export const getAdminProducts  =  async (dispatch) => {
 
     try {  
         dispatch(adminProductRequest()) 
-        const { data }  =  await axios.get(`/api/product/admin/products`);
+        const { data }  =  await axios.get(`https://meezantraders.vercel.app/api/product/admin/products`);
         dispatch(adminProductSuccess(data))
     } catch (error) {
         //handle error
@@ -98,7 +98,7 @@ export const deleteProduct  = id =>  async (dispatch) => {
 
     try {  
         dispatch(deleteProductRequest()) 
-        await axios.delete(`/api/product/supplier/product/${id}`);
+        await axios.delete(`https://meezantraders.vercel.app/api/product/supplier/product/${id}`);
         dispatch(deleteProductSuccess())
     } catch (error) {
         //handle error
@@ -113,7 +113,7 @@ export const updateProduct  = (id,productData) =>  async (dispatch) => {
 
     try {  
         dispatch(updateProductRequest()) 
-        const { data }  =  await axios.put(`/api/product/supplier/update/${id}`,productData);
+        const { data }  =  await axios.put(`https://meezantraders.vercel.app/api/product/supplier/update/${id}`,productData);
         dispatch(updateProductSuccess(data))
     } catch (error) {
         //handle error
@@ -127,7 +127,7 @@ export const getSupplierProducts  =  async (dispatch) => {
 
     try {  
         dispatch(supplierProductRequest()) 
-        const { data }  =  await axios.get(`/api/product/supplier/products`);
+        const { data }  =  await axios.get(`https://meezantraders.vercel.app/api/product/supplier/products`);
         dispatch(supplierProductSuccess(data))
     } catch (error) {
         //handle error

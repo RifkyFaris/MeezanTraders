@@ -3,7 +3,7 @@ import axios from 'axios'
 export const addCartItem=(id,quantity)=>async(dispatch)=>{
     try {
         dispatch(addCartItemRequest())
-        const {data}=await axios.get(`/api/product/product/${id}`)
+        const {data}=await axios.get(`https://meezantraders.vercel.app/api/product/product/${id}`)
         dispatch(addCartItemSuccess({
             product:data.product._id,
             name:data.product.name,
