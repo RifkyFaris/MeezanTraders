@@ -12,14 +12,7 @@ const productSchema=new mongoose.Schema({
     description: {
         type: String,
     },
-    images: [
-        {
-            image: {
-                type: String,
-                required: true
-            }
-        }
-    ],
+    
     category: {
         type: String,
         required: true,
