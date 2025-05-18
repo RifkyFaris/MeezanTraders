@@ -23,9 +23,9 @@ app.use(cookieParser())
 
 app.use('/uploads',express.static(path.join(__dirname,'uploads')))
 
-app.use('/',profile);
-app.use('/',product);
-app.use('/',order);
-app.use('/',payment);
+app.use('/api/profile',profile);
+app.use('/api/product',product);
+app.use('/api/order',order);
+app.use('/api/payment',payment);
 
 module.exports=app;

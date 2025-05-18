@@ -23,15 +23,15 @@ const upload = multer({storage: multer.diskStorage({
         cb(null, file.originalname)
     }
 }) })
-router.route('/api/products').get(getProducts);
-router.route('/api/product/:id').get(getSingleProduct);
+router.route('/products').get(getProducts);
+router.route('/product/:id').get(getSingleProduct);
 
-router.route('/api/supplier/product/new').post(isAuthenticatedUser,authorizeRoles('supplier'),upload.array('images'),newProduct)
-router.route('/api/supplier/update/:id').put(isAuthenticatedUser,authorizeRoles('supplier'),upload.array('images'),updateProducts)
-router.route('/api/supplier/product/:id').delete(isAuthenticatedUser,authorizeRoles('supplier','admin'),deleteProduct)
-router.route('/api/supplier/products').get(isAuthenticatedUser,authorizeRoles('supplier'),getSupplierProducts)
+router.route('/supplier/product/new').post(isAuthenticatedUser,authorizeRoles('supplier'),upload.array('images'),newProduct)
+router.route('/supplier/update/:id').put(isAuthenticatedUser,authorizeRoles('supplier'),upload.array('images'),updateProducts)
+router.route('/supplier/product/:id').delete(isAuthenticatedUser,authorizeRoles('supplier','admin'),deleteProduct)
+router.route('/supplier/products').get(isAuthenticatedUser,authorizeRoles('supplier'),getSupplierProducts)
 
 
-router.route('/api/admin/products').get(isAuthenticatedUser,authorizeRoles('admin'),getAdminProducts)
+router.route('/admin/products').get(isAuthenticatedUser,authorizeRoles('admin'),getAdminProducts)
 
 module.exports=router;
