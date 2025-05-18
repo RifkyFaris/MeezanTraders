@@ -30,8 +30,8 @@ import { BiLink } from 'react-icons/bi';
 export const createNewProduct=productData=>async(dispatch)=>{
     try {
         dispatch(newProductRequest())
-        const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-        const { data }  =  await axios.post(`https://meezantraders.vercel.app/api/product/supplier/product/new`,productData,config,{ withCredentials: true });
+        const config = { headers: { 'Content-Type': 'multipart/form-data' },withCredentials: true, };
+        const { data }  =  await axios.post(`https://meezantraders.vercel.app/api/product/supplier/product/new`,productData,config);
         dispatch(newProductSuccess(data))
     } catch (error) {
         dispatch(newProductFail(error.response.data.message))
