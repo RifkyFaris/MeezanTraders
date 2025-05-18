@@ -20,7 +20,7 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser())
 
-dotenv.config({path:path.join(__dirname,"config/config.env")});
+
 app.use('/uploads',express.static(path.join(__dirname,'uploads')))
 
 app.use('/',profile);
