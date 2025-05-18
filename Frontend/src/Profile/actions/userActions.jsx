@@ -55,7 +55,7 @@ import axios from 'axios';
 export const register=(userData)=>async(dispatch)=>{
     try{
         dispatch(registerRequest())
-        const {data}=await axios.post('/api/profile/register',userData)
+        const {data}=await axios.post('https://meezantraders.vercel.app/api/profile/register',userData)
         dispatch(registerSuccess(data))
     }catch(error){
         dispatch(registerFail(error.response.data.message))
