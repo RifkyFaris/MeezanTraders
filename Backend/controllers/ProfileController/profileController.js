@@ -33,32 +33,6 @@ exports.registerUser=async(req,res,next)=>{
 }
 
 
-//register supplier
-exports.registerSupplier=async(req,res,next)=>{
-    const {name,phoneNo,password,email}=req.body;
-     const role="supplier"
-    try {
-        const user=await User.create({name,phoneNo,password,role,email});
-      
-        const token=user.getJwtToken();
-        res.status(201).json({
-            success:true,
-            user,
-            token
-        })
-    } catch (error) {
-        if (error.code === 11000) {
-            return res.status(400).json({
-                success: false,
-                message:"Phone Number already in use",
-            });
-        }
-        res.status(500).json({
-            success: false,
-            message: error,
-        });
-    }
-}
 
 //login user
 exports.loginUser=async(req,res,next)=>{
@@ -89,13 +63,13 @@ exports.loginUser=async(req,res,next)=>{
     const sender=nodemailer.createTransport({
         service:'gmail',
         auth:{
-            user:process.env.EMAIL_USER,
-            pass:process.env.EMAIL_PASS,
+            user:'rifdhi9@gmail.com',
+            pass:'pass',
         }
     })
     
     const mailOptions={
-        from:process.env.EMAIL_USER,
+        from:'rifdhi9@gmail.com',
         to:user.email,
         subject:"Login success",
         text:"Login success to "
@@ -114,9 +88,6 @@ exports.logoutUser=(req,res,next)=>{
     res.cookie('token',null,{
         expires:new Date(Date.now()),
         httpOnly:true,
-        secure: process.env.NODE_ENV === 'production',
-  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-  path: '/',
     })
     .status(200).json({
         success:true,
@@ -183,13 +154,13 @@ exports.forgotPassword =  async (req, res, next)=>{
         const sender=nodemailer.createTransport({
             service:'gmail',
             auth:{
-                user:process.env.EMAIL_USER,
-                pass:process.env.EMAIL_PASS,
+                user:'rifdhi9@gmail.com',
+                pass:'pass',
             }
         })
         
         const mailOptions={
-            from:process.env.EMAIL_USER,
+            from:'rifdhi9@gmail.com',
             to:user.email,
             subject:"Password Reset",
             text:`${message}`
@@ -309,81 +280,4 @@ exports.deleteUser=async(req,res,net)=>{
     res.status(200).json({
         success:true
     })
-}
-//register supplier
-exports.registerMechanic=async(req,res,next)=>{
-    const {name,phoneNo,password,email}=req.body;
-     const role="mechanic"
-    try {
-        const user=await User.create({name,phoneNo,password,role,email});
-      
-        const token=user.getJwtToken();
-        res.status(201).json({
-            success:true,
-            user,
-            token
-        })
-    } catch (error) {
-        if (error.code === 11000) {
-            return res.status(400).json({
-                success: false,
-                message:"Phone Number already in use",
-            });
-        }
-        res.status(500).json({
-            success: false,
-            message: error,
-        });
-    }
-}
-exports.registertowing=async(req,res,next)=>{
-    const {name,phoneNo,password,email}=req.body;
-     const role="towing"
-    try {
-        const user=await User.create({name,phoneNo,password,role,email});
-      
-        const token=user.getJwtToken();
-        res.status(201).json({
-            success:true,
-            user,
-            token
-        })
-    } catch (error) {
-        if (error.code === 11000) {
-            return res.status(400).json({
-                success: false,
-                message:"Phone Number already in use",
-            });
-        }
-        res.status(500).json({
-            success: false,
-            message: error,
-        });
-    }
-}
-
-exports.registercarwash=async(req,res,next)=>{
-    const {name,phoneNo,password,email}=req.body;
-     const role="carwash"
-    try {
-        const user=await User.create({name,phoneNo,password,role,email});
-      
-        const token=user.getJwtToken();
-        res.status(201).json({
-            success:true,
-            user,
-            token
-        })
-    } catch (error) {
-        if (error.code === 11000) {
-            return res.status(400).json({
-                success: false,
-                message:"Phone Number already in use",
-            });
-        }
-        res.status(500).json({
-            success: false,
-            message: error,
-        });
-    }
 }

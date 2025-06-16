@@ -8,7 +8,7 @@ exports.newOrder = async (req, res, next) => {
     itemPrice,
     shippingPrice,
     totalPrice,
-    paymentInfo,
+    orderStatus
   } = req.body;
   const order = await Order.create({
     orderItems,
@@ -16,7 +16,7 @@ exports.newOrder = async (req, res, next) => {
     itemPrice,
     shippingPrice,
     totalPrice,
-    paymentInfo,
+    orderStatus,
     paidAt: Date.now(),
     user: req.user.id,
   });
@@ -98,44 +98,19 @@ exports.deleteOrder = async (req, res, next) => {
     success: true,
   });
 };
-
-
-
-exports.getSupplierOrders = async (req, res) => {
-  try {
-    const supplierId = req.user.id; // Supplier must be logged in
-
-    // Fetch all orders and populate product details
-    const orders = await Order.find().populate({
-      path: "orderItems.product",
-      select: "name price user",
-    });
-
-    // Filter only the products that belong to the logged-in supplier
-    const supplierOrders = orders
-      .map((order) => ({
-        _id: order._id,
-        shippingInfo: order.shippingInfo,
-        orderStatus: order.orderStatus,
-        totalPrice: order.totalPrice,
-        createdAt: order.createdAt,
-        orderItems: order.orderItems.filter(
-          (item) => item.product && item.product.user.toString() === supplierId
-        ),
-      }))
-      .filter((order) => order.orderItems.length > 0); // Only keep orders that have supplier's products
+exports.getProcessingOrders = async (req, res, next) => {
+  
+    const processingOrders = await Order.find({ orderStatus: "Processing" });
 
     res.status(200).json({
       success: true,
-      orders: supplierOrders,
+      processingOrders,
     });
-
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
-  }
+  
 };
+
+
+
+
 
 
