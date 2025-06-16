@@ -35,7 +35,7 @@ import ForgotPassword from './Profile/ForgotPassword.jsx'
 import ResetPassword from './Profile/ResetPassword.jsx'
 import UserList from './Profile/UserList.jsx'
 import OutOfStockList from './Market/OutOfStockList.jsx'
-import ExpiredList from './Market/Expiredlist.jsx'
+import ExpiredList from './Market/ExpiredList.jsx'
 import ProcessingList from './Market/ProcessingList.jsx'
 
 
