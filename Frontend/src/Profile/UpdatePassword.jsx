@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import { updatePassword,clearAuthError } from "./actions/userActions"
-import './Login.css'
 
 const UpdatePassword = () => {
     const [password,setPassword]=useState("")
@@ -35,7 +34,7 @@ const UpdatePassword = () => {
         }
     },[isUpdated,error,dispatch])
   return (
-    <div className="container1">
+    <div className="container">
       <div className="login">
           <p className="login-title">Update Password</p>
           

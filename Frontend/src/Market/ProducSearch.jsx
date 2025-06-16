@@ -5,7 +5,6 @@ import { getProducts } from './actions/productActions'
 import Product from './Product'
 import {toast} from 'react-toastify'
 import { useParams } from "react-router-dom"
-import '../Profile/Login.css'
 import Search from './Search'
 
 import { FaShoppingCart } from "react-icons/fa";
@@ -31,7 +30,7 @@ const ProducSearch = () => {
   },[error,currentPage,dispatch,keyword,priceChanged,category])
   return (
     <Fragment>
-    <div className='container1'>
+    <div className='container'>
       
       
      <Search />

@@ -1,7 +1,6 @@
-import React from 'react'
+
 import { useEffect, useState } from 'react'
 import {useNavigate,useLocation} from 'react-router-dom'
-import '../Profile/Login.css'
 import { IoSearch } from "react-icons/io5";
 
 const Search = () => {
@@ -23,14 +22,16 @@ const Search = () => {
 
 
   return (
+    <div className="container">
     <form onSubmit={searchHandler}>
-       <div className="search-rifky">
-        <div className="search-container-rifky">
-          <input className="search-box-rifky" value={keyword} onChange={(e)=>{setKeyword(e.target.value)}} type="text" placeholder="Search Product..." />
-          <button className="button-rifky" type="submit">
+      
+       <div className="search">
+        <div className="search-container">
+          <input className="search-box" value={keyword} onChange={(e)=>{setKeyword(e.target.value)}} type="text" placeholder="Search Product..." />
+          <button className="button" type="submit">
           <IoSearch  
-                        color={'#f8f8f6'}
-                        size="1.4em"
+                        color={'#128580'}
+                        size="2em"
                         
                         
                     />
@@ -41,6 +42,7 @@ const Search = () => {
         
       </div>
       </form>
+      </div>
     
   )
 }

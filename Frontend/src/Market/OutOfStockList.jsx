@@ -1,21 +1,13 @@
 import { Fragment, useEffect } from 'react'
-import { useDispatch, useSelector } from "react-redux"
-import {deleteProduct,getAdminProducts} from './actions/productActions'
-import {clearError} from './slice/productsSlice'
+import {  useSelector } from "react-redux"
 import { MDBDataTable} from 'mdbreact';
-import {toast } from 'react-toastify'
-import { clearProductDeleted } from './slice/productSlice'
-
-import { IoTrashBin } from "react-icons/io5";
 import jsPDF from "jspdf"
 import { FaPen } from "react-icons/fa";
 import "jspdf-autotable"
 import {Link} from 'react-router-dom'
 
-export default function AdminProductList() {
-    const { products = [], loading = true, error }  = useSelector(state => state.productState)
-    const { isProductDeleted, error:productError }  = useSelector(state => state.productState)
-    const dispatch = useDispatch();
+export default function OutOfStockList() {
+    const { low = [], loading = true, error }  = useSelector(state => state.productState)
     
     const setProducts = () => {
         const data = {
@@ -54,7 +46,7 @@ export default function AdminProductList() {
             ],
             rows : []
         }
-        products.forEach( product => {
+        low.forEach( product => {
             data.rows.push({
                 
                 name: product.name,
@@ -67,9 +59,7 @@ export default function AdminProductList() {
                     <Fragment >
                         <div className="tablefrag">
                         <Link className='edit' to={`/supplier/product/${product._id}`} ><FaPen size="1.3em"/> </Link>
-                        <p className="deleteProduct" onClick={e => deleteHandler(e, product._id)} >
-                           <IoTrashBin size="1.3em"/>
-                        </p>
+                        
                         </div>
                         
                     </Fragment>
@@ -80,29 +70,8 @@ export default function AdminProductList() {
         return data;
     }
     
-    const deleteHandler = (e, id) => {
-        e.target.disabled = true;
-        dispatch(deleteProduct(id))
-    }
 
-    useEffect(() => {
-        if(error || productError) {
-            toast.error(error || productError, {
-                
-                onOpen: ()=> { dispatch(clearError()) }
-            })
-            return
-        }
-        if(isProductDeleted) {
-            toast.success('Product Deleted Succesfully!',{
-                
-                onOpen: () => dispatch(clearProductDeleted())
-            })
-            return;
-        }
-
-        dispatch(getAdminProducts)
-    },[dispatch, error, isProductDeleted])
+   
 
     const generatePDF = () => {
     const doc = new jsPDF();
@@ -139,7 +108,7 @@ export default function AdminProductList() {
     // Table body
     doc.setFont(undefined, "normal");
 
-    products.forEach(product => {
+    low.forEach(product => {
         const row = [
             product.name || "N/A",
             `Rs. ${product.price}`,
@@ -167,7 +136,7 @@ export default function AdminProductList() {
     });
 
     // Save the PDF
-    doc.save("admin-product-list.pdf");
+    doc.save("admin-lowsock-list.pdf");
 };
 
 

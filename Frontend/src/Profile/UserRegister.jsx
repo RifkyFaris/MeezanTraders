@@ -1,6 +1,4 @@
 import React,{Fragment,useEffect,useState} from 'react'
-import './Login.css'
-import '../components/header.css'
 import { Link,useNavigate } from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
 import {register,clearAuthError} from './actions/userActions.jsx'
@@ -66,7 +64,7 @@ const UserRegister = () => {
 
   return (
     <Fragment>
-    <div className='container1'>
+    <div className='container'>
       
       <div className="register">
         <p className="login-title">Register</p>

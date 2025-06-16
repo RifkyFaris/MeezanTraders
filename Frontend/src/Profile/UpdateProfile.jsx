@@ -5,7 +5,6 @@ import {updateProfile,clearAuthError} from '../Profile/actions/userActions'
 import { clearUpdateProfile } from "./slice/userSlice"
 import { useNavigate } from "react-router-dom"
 
-import './Login.css'
 
 const UpdateProfile = () => {
   const {error,user,isUpdated}=useSelector(state=>state.authState)
@@ -49,7 +48,7 @@ const UpdateProfile = () => {
         }
 },[user,isUpdated,error,dispatch])
   return (
-    <div className='container1'>
+    <div className='container'>
     <div className="register">
     <p className="login-title">Update Profile</p>
     

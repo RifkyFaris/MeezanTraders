@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import './Login.css'
 import { toast } from "react-toastify"
 import {forgotPassword as fp,clearAuthError} from './actions/userActions'
+
+import { Link } from 'react-router-dom'
 
 
 const ForgotPassword = () => {
@@ -32,7 +33,7 @@ const ForgotPassword = () => {
         }
     },[message,error,dispatch])
   return (
-    <div className="container1">
+    <div className="container">
       
       <div className="login">
           <p className="login-title">Forgot Password</p>
@@ -45,7 +46,7 @@ const ForgotPassword = () => {
               <br/><br/>
               <input type="submit" className="submit" value="Request password reset"/>
               
-            <a href="register.html"><p className="dont">Don't have an account ?</p></a>
+            <Link  to="/user/register"><p className="dont">Don't have an account ?</p></Link>
           
             </form>
             

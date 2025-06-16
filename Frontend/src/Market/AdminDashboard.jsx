@@ -1,30 +1,45 @@
-
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux';
 import { useEffect } from "react";
 import {getAdminProducts} from './actions/productActions'
-import { adminOrders as adminOrdersAction } from './actions/orderActions';
+import {lowstock,expiry as ex} from './actions/productActions'
+import { adminOrders as adminOrdersAction ,processingOrders} from './actions/orderActions';
 import {getUsers} from '../Profile/actions/userActions'
+
 const AdminDAshboard = () => {
   const { products = [] } = useSelector( state => state.productState);
-  const { adminOrders = [] } = useSelector( state => state.orderState);
+  const { low = [], expiry=[] } = useSelector( state => state.productState);
+  const { adminOrders = [],process=[] } = useSelector( state => state.orderState);
   const { users = [] } = useSelector( state => state.authState);
+  let totalAmount = 0;
+    if (adminOrders.length > 0) {
+        adminOrders.forEach( order => {
+            totalAmount += order.totalPrice
+        })
+    }
   const dispatch = useDispatch();
     
   useEffect( () => {
+   
     dispatch(getAdminProducts);
+    
     dispatch(adminOrdersAction);
+    
     dispatch(getUsers);
+    
+     dispatch(lowstock());
+     dispatch(ex())
+     dispatch(processingOrders());
    
   }, [])
   return (
-    <div className='container1'>
+    <div className='container'>
       <div className="hero1" >
         <h1 className="what" id="services">Dashboard</h1>
         <div className="row">
           <div className="col1_service"> 
             <Link className="service_list" to="/admin/products">
-            <span className="no">Market Place Products</span><br/>
+            <span className="no">Products</span><br/>
             
             <p className="quote">
               
@@ -41,10 +56,12 @@ const AdminDAshboard = () => {
             
           </div>
           <div className="col1_service">
-            <Link className="service_list" to="/mech/dash">
-            <span className="no">Mechanic Dashboard</span> <br/>
-             
-            </Link>
+            <Link className="service_list" to="/admin/outofstock">
+            <span className="no">Out of Stock</span> <br/>
+             <p className="quote">
+              
+              {low?.length} Products              </p></Link>
+            
             </div>
         </div>
 
@@ -52,34 +69,45 @@ const AdminDAshboard = () => {
 
         <div className="row">
           <div className="col1_service"> 
-            <Link className="service_list" to="/spareparts/orders">
-            <span className="no">Spareparts Orders</span><br/>
-            
+            <Link className="service_list" to="/admin/expired">
+            <span className="no">Expired</span><br/>
             <p className="quote">
               
-              {adminOrders.length} Order
-            </p></Link>
+              {expiry?.length} Products              </p>
+            
+           </Link>
           </div>
           <div className="col1_service">
-            <a className="service_list" href="#">
-            <span className="no"> Products </span> <br/>
-           
+            <Link className="service_list" to="/admin/orders">
+            <span className="no"> Sales </span> <br/>
             <p className="quote">
-              
-              10 products
-              </p></a>
-            
-          </div>
-          <div className="col1_service">
-            <a className="service_list" href="#">
-            <span className="no">Orders</span> <br/>
-             
-            <p className="quote">
-              
-              10 orders
+              Rs. {totalAmount} <br />
+              {adminOrders?.length} orders
           
-              </p></a>
+              </p>
+           
+            </Link>
+            
+          </div>
+          <div className="col1_service">
+            <Link className="service_list" to="/admin/processing">
+            <span className="no">Orders</span> <br/>
+             <p className="quote">
+              {process?.length} orders
+          
+              </p>
+            </Link>
             </div>
+        </div>
+        <div className="row">
+          <div className="col1_service"> 
+            <Link className="service_list" to="/new/product">
+            <span className="no">New Product</span><br/>
+            
+            </Link>
+          </div>
+          
+          
         </div>
         
           

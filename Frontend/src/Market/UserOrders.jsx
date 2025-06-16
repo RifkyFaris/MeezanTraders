@@ -1,9 +1,10 @@
 import { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { MDBDataTable} from 'mdbreact';
+
 import { FaEye } from "react-icons/fa";
 import {userOrders as userOrdersAction} from '../Market/actions/orderActions'
-import '../Profile/Login.css'
+
 
 import { Link } from "react-router-dom"
 
@@ -23,16 +24,8 @@ const userOrders = () => {
                     field: 'id',
                     sort: 'asc'
                 },
-                {
-                    label: 'Number of Items',
-                    field: 'noOfItems',
-                    sort: 'asc'
-                },
-                {
-                    label: 'Amount',
-                    field: 'amount',
-                    sort: 'asc'
-                },
+                
+                
                 {
                     label: 'Status',
                     field: 'status',
@@ -51,11 +44,11 @@ const userOrders = () => {
             data.rows.push({
                 id: userOrder._id,
                 noOfItems: userOrder.orderItems.length,
-                amount : `$${userOrder.totalPrice}`,
+                amount : `Rs.${userOrder.totalPrice}`,
                 status: <p style={{color: userOrder.orderStatus.includes('Processing') ? 'red' : 'green'}}>{userOrder.orderStatus}</p> ,
                 actions: (
-                <Link className='edit' style={{paddingTop:'15px'}} to={`/order/${userOrder._id}`}  >
-                    <FaEye  size="1.3em" />
+                <Link className='edit' style={{padding:'5px'}} to={`/order/${userOrder._id}`}  >
+                    <FaEye size="1.3em"/>
                 </Link>
                 )
             })
@@ -68,7 +61,7 @@ const userOrders = () => {
 
 
   return (
-    <div className='container1'>
+    <div className='container'>
         <div className="register">
             
         <Fragment>
@@ -79,6 +72,7 @@ const userOrders = () => {
                         striped
                         hover
                         className='table'
+                        
                         
                         
                         

@@ -1,10 +1,8 @@
-import React,{Fragment,useEffect,useState}  from 'react'
+import {Fragment,useEffect,useState}  from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import {getProducts} from './actions/productActions.jsx'
 import {toast} from 'react-toastify'
 import Pagination from 'react-js-pagination'
-
-import '../Profile/Login.css'
 import Search from './Search'
 import Product from './Product.jsx'
 import { FaShoppingCart } from "react-icons/fa";
@@ -31,18 +29,17 @@ const Shop = () => {
   
   return (
     <Fragment>
-      
-    <div className='container1'>
+    <div className='container'>
       
       
      <Search />
       
       <div className="product-container">
         <div className="dairy">
-          <h2 className="category-heading">Spare Parts</h2>
+          <h2 className="category-heading">Products</h2>
           <div className="products">
           {products && products.map(product=>(
-                    <Product  key={product._id} product={product}/>
+                    <Link to={`/product/${product._id}`}><Product  key={product._id} product={product}/></Link>
                   ))}
             
           </div>

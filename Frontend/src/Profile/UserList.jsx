@@ -4,10 +4,9 @@ import {deleteUser,getUsers} from './actions/userActions'
 import { clearError,clearUserDeleted } from './slice/userSlice';
 import { MDBDataTable} from 'mdbreact';
 import {toast } from 'react-toastify'
-import '../Profile/Login.css'
+
 import { IoTrashBin } from "react-icons/io5";
-import { FaPen } from "react-icons/fa";
-import {Link} from 'react-router-dom'
+
 
 
 export default function UserList() {
@@ -55,7 +54,7 @@ export default function UserList() {
                 actions: (
                     <Fragment>
                         <div className="tablefrag">
-                            <Link className='edit' to={`/supplier/product/${user._id}`} ><FaPen size="1.3em"/> </Link>
+                            
                             <p className="deleteProduct" onClick={e => deleteHandler(e, user._id)} >
                             <IoTrashBin size="1.3em"/>
                             </p>
@@ -94,7 +93,7 @@ export default function UserList() {
 
 
   return (
-    <div className='container1'>
+    <div className='container'>
         <div className="register">
         <Fragment>
                 {loading ? <></> : 

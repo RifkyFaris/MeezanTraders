@@ -2,13 +2,24 @@ import { IoTrashBin } from "react-icons/io5";
 import { Fragment } from "react"
 import {useSelector,useDispatch} from 'react-redux'
 import {Link, useNavigate} from 'react-router-dom'
-import '../Profile/Login.css'
+import { createOrder } from './actions/orderActions.jsx';
+import { orderCompleted } from './slice/cartSlice.jsx';
+import { toast } from 'react-toastify';
+
 
 
 import { decreaseCartItemQty,increaseCartItemQty,removeItemFromCart } from "./slice/cartSlice.jsx"
 
 export default function cart(){
   const {items}=useSelector(state=>state.cartState)
+  const shippingInfo = {
+    address: "POS Order",
+    phoneNo: "0542224281"
+  };
+  const orderStatus="Delivered"
+  
+      const {isAuthenticated,user}=useSelector(state=>state.authState)
+      const totalPrice = items.reduce((acc, item) => acc + item.quantity * item.price, 0);
     const dispatch=useDispatch()
     const navigate=useNavigate()
     const increaseQty = (item) => {
@@ -23,12 +34,112 @@ export default function cart(){
         dispatch(decreaseCartItemQty(item.product))
     };
     const checkOutHandler=()=>{
+      if (items.length === 0) {
+      toast.warn("Cannot place order: missing address or empty cart");
+      return;
+    }else{
         navigate('/login?redirect=shipping')
     }
+    
+        
+    }
+    const placeOrderHandler = async () => {
+    if (items.length === 0) {
+      toast.warn("Cannot place order: missing address or empty cart");
+      return;
+    }
+
+    const order = {
+      orderItems: items,
+      itemsPrice: totalPrice,
+      totalPrice,
+      shippingInfo,
+      orderStatus:"Delivered"
+    };
+
+    try {
+      dispatch(createOrder(order)) // assuming createOrder is an async thunk
+      dispatch(orderCompleted()); // clear cart
+      toast.success("Order placed successfully!");
+      navigate('/');
+    } catch (error) {
+      toast.error("Order failed");
+      console.error(error);
+    }
+  };
+  const printReceipt = (order) => {
+  const receiptWindow = window.open('', '_blank', 'width=300,height=600');
+  const receiptContent = `
+    <html>
+      <head>
+        <style>
+          body { font-family: monospace; width: 60mm; padding: 10px; }
+          .receipt-title { text-align: center; font-weight: bold; font-size: 16px; margin-bottom: 10px; }
+          .line { border-top: 1px dashed #000; margin: 5px 0; }
+          .item { display: flex; justify-content: space-between; font-size: 12px; }
+          .footer { margin-top: 10px; text-align: center; font-size: 12px; }
+        </style>
+      </head>
+      <body>
+        <div class="receipt-title">Meezan Traders</div>
+        <div class="receipt-title">No.22 Kotmale Road Nawalapitiya</div>
+        <div class="receipt-title">0542224102</div>
+        <div>Date: ${new Date().toLocaleString()}</div>
+        <div class="line"></div>
+        ${order.orderItems.map(item => `
+          <div class="item">
+            <span>${item.name} x${item.quantity}</span>
+            <span>Rs.${item.price * item.quantity}</span>
+          </div>
+        `).join('')}
+        <div class="line"></div>
+        <div class="item">
+          <strong>Total</strong>
+          <strong>Rs.${order.totalPrice}</strong>
+        </div>
+        <div class="line"></div>
+        <div class="footer">Thank you for shopping!</div>
+      </body>
+    </html>
+  `;
+
+  receiptWindow.document.write(receiptContent);
+  receiptWindow.document.close();
+  receiptWindow.focus();
+  receiptWindow.print();
+  receiptWindow.close();
+};
+const placeAndPrintOrderHandler = async () => {
+  if (items.length === 0) {
+    toast.warn("Cannot place order: empty cart");
+    return;
+  }
+
+  const order = {
+    orderItems: items,
+    itemsPrice: totalPrice,
+    totalPrice,
+    shippingInfo,
+    orderStatus: "Delivered"
+  };
+
+  try {
+    dispatch(createOrder(order))
+    dispatch(orderCompleted()); // Clear cart
+    toast.success("Order placed successfully!");
+    printReceipt(order); // 🖨️ Print receipt after placing order
+    navigate('/');
+  } catch (error) {
+    toast.error("Order failed");
+    console.error(error);
+  }
+};
+
 
 
   return (
-    <div className='container1'>
+    <div className='container'>
+      
       
 <div className="cartItem">
     <div className="cartitems">
@@ -46,6 +157,7 @@ export default function cart(){
             <div className="icons">
               <div className="addtocartitem">
                 <p className="minus" onClick={()=>dispatch(decreaseQty(item))}>-</p>
+                
                 <input className="qty" type="number" value={item.quantity} readOnly/>
                 <p className="plus" onClick={()=>increaseQty(item)}>+</p>
               </div>
@@ -68,7 +180,19 @@ export default function cart(){
         <p className="noofitems">No of Items: <b>{items.length}</b></p>
         
         <p className="noofitems">Total: <b>Rs.{items.reduce((acc,item)=>(acc+item.quantity*item.price),0)}</b></p>
-        <a href="#"><p className="cartbutton" onClick={checkOutHandler}>Checkout</p></a>
+        
+        
+       {isAuthenticated && (user.role === 'cashier' || user.role === 'admin') && (
+  <>
+    <p className="profilebutton" onClick={placeOrderHandler}>Place Order</p>
+    <p className="profilebutton" onClick={placeAndPrintOrderHandler}>Print</p>
+  </>
+)}
+
+{isAuthenticated && user.role === 'user' && (
+  <p className="profilebutton" onClick={checkOutHandler}>Cash On Delivery</p>
+)}
+     
     </div>
     
   

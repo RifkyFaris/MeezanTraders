@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import './Login.css'
 import {useNavigate, useParams} from 'react-router-dom'
 import { toast } from "react-toastify"
 import{clearAuthError,resetPassword} from './actions/userActions'
@@ -39,7 +38,7 @@ const ResetPassword = () => {
               }
         },[error,isAuthenticated,dispatch,navigate])
   return (
-    <div className="container1">
+    <div className="container">
         
         <div className="login">
           <p className="login-title">Reset Password</p>

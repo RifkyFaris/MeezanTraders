@@ -1,10 +1,9 @@
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import './Login.css'
 const Profile = () => {
     const {user}=useSelector(state=>state.authState)
   return (
-    <div className='container1'>
+    <div className='container'>
     <div className="login">
     <div className="profile">
         <p className="profileDetails">Name : {user.name}</p>

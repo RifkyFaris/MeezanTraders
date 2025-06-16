@@ -6,6 +6,7 @@ const productsSlice =createSlice({
     initialState:{
         loading:false,
         
+        
     },
     reducers: {
         productsRequest(state, action){
@@ -28,6 +29,7 @@ const productsSlice =createSlice({
                 error:  action.payload
             }
         },
+        
         clearError(state,action){
             return{
                 ...state,
@@ -43,7 +45,8 @@ export const {
     productsRequest, 
     productsSuccess, 
     productsFail,
-    clearError
+    clearError,
+    
     
 
 } = actions;

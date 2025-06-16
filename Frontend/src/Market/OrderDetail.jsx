@@ -18,25 +18,24 @@ const OrderDetail = () => {
     <div>
         {loading?<></>:
         <Fragment>
-            <div className='container1'>
+            <div className='container'>
             
       
       <div className="cartItem">
       
             <div className="cartitems">
-            <p className="yourcart" style={{ fontSize:"30px" }} >Order # {orderDetail._id} </p>
+            <p className="yourcart" style={{ fontSize:"20px" }} >Order # {orderDetail._id} </p>
                 
                 <p className="yourcart" >Shipping Info </p>
                 
-                <p className="shippingdetails" style={{ color: '#f8f8f6',fontSize:"20px" }}>Name: <b>{user.name}</b></p>
+                <p className="shippingdetails" style={{ color: '#151f28',fontSize:"20px" }}>Name: <b>{user.name}</b></p>
                 
-                <p className="shippingdetails" style={{ color: '#f8f8f6', margin: '10px 0',fontSize:"20px" }}>Address: <b>{shippingInfo.address}, {shippingInfo.city}</b></p>
+                <p className="shippingdetails" style={{ color: '#151f28', margin: '10px 0',fontSize:"20px" }}>Address: <b>{shippingInfo.address}, {shippingInfo.city}</b></p>
                 
-                <p className="shippingdetails" style={{ color: '#f8f8f6' ,fontSize:"20px"}}>Phone Number: <b>{shippingInfo.phoneNo}</b></p><br/>
-                <p className="shippingdetails" style={{ color: '#f8f8f6',fontSize:"20px" }}>Amount: <b>Rs. {totalPrice}</b></p><br/>
+                <p className="shippingdetails" style={{ color: '#151f28' ,fontSize:"20px"}}>Phone Number: <b>{shippingInfo.phoneNo}</b></p><br/>
+                <p className="shippingdetails" style={{ color: '#151f28',fontSize:"20px" }}>Amount: <b>Rs. {totalPrice}</b></p><br/>
 
-                <p className="shippingdetails" style={{ color: '#f8f8f6',fontSize:"20px" }}>Payment: <b>{isPaid ? 'PAID' : 'NOT PAID' }</b></p><br/>
-                <p className="shippingdetails" style={{ color: '#f8f8f6',fontSize:"20px" }}>Order Status: <b>{orderStatus}</b></p><br/>
+                <p className="shippingdetails" style={{ color: '#151f28',fontSize:"20px" }}>Order Status: <b>{orderStatus}</b></p><br/>
 
                 <p className="yourcart" >Order Items: </p>
                 {orderItems.map(item=>(

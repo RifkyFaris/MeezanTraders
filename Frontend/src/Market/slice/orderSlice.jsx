@@ -155,20 +155,20 @@ const orderSlice =createSlice({
                 isOrderUpdated:false
             }
         },
-        supplierOrdersRequest(state, action) {
+        processingOrdersRequest(state, action) {
             return {
                 ...state,
                 loading: true,
             }
         },
-        supplierOrdersSuccess(state, action) {
+        processingOrdersSuccess(state, action) {
             return {
                 ...state,
                 loading: false,
-                supplierOrders: action.payload.orders
+                process: action.payload.processingOrders
             }
         },
-        supplierOrdersFail(state,action){
+        processingOrdersFail(state,action){
             return{
                 ...state,
                 loading:false,
@@ -176,6 +176,7 @@ const orderSlice =createSlice({
             }
             
         },
+        
     }
     })
     const { actions, reducer } = orderSlice;
@@ -201,9 +202,9 @@ const orderSlice =createSlice({
         updateOrdersSuccess,
         clearOrderDeleted,
         clearOrderUpdated,
-        supplierOrdersFail,
-        supplierOrdersRequest,
-        supplierOrdersSuccess,
+        processingOrdersRequest,
+        processingOrdersFail,
+        processingOrdersSuccess,
     }=actions;
 
     export default reducer;

@@ -9,6 +9,7 @@ const productSlice=createSlice({
         isProductCreated:false,
         isProductDeleted:false,
         isProductUpdated:false,
+        low:{}
     },
     reducers:{
         newProductRequest(state,action){
@@ -58,6 +59,7 @@ const productSlice=createSlice({
                 error:  action.payload
             }
         },
+        
         adminProductRequest(state, action){
             return {
                 loading: true
@@ -132,24 +134,53 @@ const productSlice=createSlice({
                 isProductUpdated:false
             }
         },
-        supplierProductRequest(state, action){
-            return {
-                loading: true
-            }
-        },
-        supplierProductSuccess(state, action){
-            return {
-                loading: false,
-                products: action.payload.products
-                
-            }
-        },
-        supplierProductFail(state, action){
-            return {
-                loading: false,
-                error:  action.payload
-            }
-        },
+        lowStockRequest(state, action) {
+                    return{
+                        ...state,
+                        loading :true,
+                    }
+                    
+                },
+                lowStockSuccess(state, action) {
+                    return{
+                        ...state,
+                        loading : false,
+                        low : action.payload
+                    }
+                    
+                },
+                lowStockFail(state, action) {
+                    return{
+                        ...state,
+                        loading : false,
+                    error :action.payload
+                    }
+                    
+                },
+        expirykRequest(state, action) {
+                    return{
+                        ...state,
+                        loading :true,
+                    }
+                    
+                },
+                expirySuccess(state, action) {
+                    return{
+                        ...state,
+                        loading : false,
+                        expiry : action.payload
+                    }
+                    
+                },
+                expiryFail(state, action) {
+                    return{
+                        ...state,
+                        loading : false,
+                    error :action.payload
+                    }
+                    
+                },
+        
     }
 })
 const {actions,reducer}=productSlice;
@@ -177,10 +208,13 @@ export const{
     updateProductRequest,
     updateProductSuccess,
     clearProductUpdated,
-
-    supplierProductFail,
-    supplierProductRequest,
-    supplierProductSuccess,
+    lowStockFail,
+    lowStockSuccess,
+    lowStockRequest,
+    expiryFail,
+    expirySuccess,
+    expirykRequest
+    
 
 
 }=actions;

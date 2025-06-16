@@ -1,10 +1,9 @@
-import React from 'react'
-import '../Profile/Login.css'
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { saveShippingInfo } from "./slice/cartSlice"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import {Link} from 'react-router-dom'
 
 export const validateShipping = (shippingInfo, navigate) => {
    
@@ -31,7 +30,7 @@ export default function Shipping(){
     }
   
     return (
-    <div className="container1">
+    <div className="container">
        <div className='register'>
       
       <p className="login-title">Shipping Info</p>
@@ -42,29 +41,21 @@ export default function Shipping(){
                 <label className="label" htmlFor="address">Address</label><br/>
                 <input type="text" id='address' value={address} required onChange={(e)=>setAddress(e.target.value)} placeholder="Enter Address"/><br/><br/>
                 
-                <label className="label" htmlFor="city">City</label><br/>
-                <input type="tel" id='city' value={city} onChange={(e)=>setCity(e.target.value)} required placeholder="Enter City"/><br/><br/>
-
-                <label className="label" htmlFor="city">Postal Code</label><br/>
-                <input type="number" id='postalcode' value={postalCode} onChange={(e)=>setPostalCode(e.target.value)} required placeholder="Enter Postal code"/><br/><br/>
-
-                <label className="label"  htmlFor="phone">District</label><br/>
-                <input type="text" id="district" value={district}  onChange={(e)=>setDistrict(e.target.value)} required placeholder="Enter District"/>
                 
-                <br/><br/>
-
-                <label className="label"  htmlFor="phone">Country</label><br/>
-                <input type="text" id="country" value={country}  onChange={(e)=>setCountry(e.target.value)} required placeholder="Enter Country"/>
                 
-                <br/><br/>
+                
+
+                
                 <label className="label"  htmlFor="phone">Phone</label><br/>
                 <input type="tel" id="district" value={phoneNo}  onChange={(e)=>setPhoneNo(e.target.value)} required placeholder="Enter Phone Number"/>
                 
                 <br/><br/>
-                <input type="submit" id="pay_btn" className="submit" value="Continue"/>
+                <input type="submit" id="pay_btn" className="submit" value="Confirm Order"/>
+                
                 
             
               </form>
+              <Link to="/"><p className="continue">Continue Shopping</p></Link>
               
             </div>
     </div>

@@ -1,8 +1,6 @@
-import React,{Fragment,useEffect,useState} from 'react'
+import {Fragment,useEffect,useState} from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import {toast} from 'react-toastify'
-import './Login.css'
-import '../components/header.css'
 import { Link,useLocation,useNavigate } from 'react-router-dom'
 import {login,clearAuthError} from './actions/userActions.jsx'
 
@@ -33,7 +31,7 @@ const Login = () => {
 
   return (
     <Fragment>
-    <div className='container1'>
+    <div className='container'>
       
       
       <div className="login">

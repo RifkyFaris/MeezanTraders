@@ -1,5 +1,5 @@
 import  {  useEffect, useState } from 'react'
-import '../Profile/Login.css'
+
 import { useDispatch, useSelector} from 'react-redux';
 import { useNavigate, useParams } from "react-router-dom";
 import {getProduct,updateProduct} from './actions/productActions'
@@ -15,25 +15,15 @@ const UpdateProduct = () => {
   const [images, setImages] = useState([]);
   const [imagesCleared, setImagesCleared] = useState(false);
   const [imagesPreview, setImagesPreview] = useState([]);
+  const[discount,setDiscount]=useState("");
+  const [expiry, setExpiry] = useState("");
   const { id:productId } = useParams();
 
   
   const { loading, isProductUpdated, error, product } = useSelector( state => state.productState)
   const categories=[
-    'Tyre',
-    'Head Light',
-    'Engine Oil',
-    'Break Oil',
-    'Radiator Coolant',
-    'Break Pads',
-    'Wiper Blades',
-    'Fan Belt',
-    'Clutch Plate',
-    'Rim',
-    'Indicator Light',
-    'Break Light',
-    'Gear Oil',
-    'Horn'
+    'Dairy',
+    
 ];
 
 const navigate = useNavigate();
@@ -66,6 +56,8 @@ const submitHandler = (e) => {
   formData.append('name' , name);
   formData.append('price' , price);
   formData.append('stock' , stock);
+  formData.append('discount',discount);
+  formData.append('expiry',expiry);
   formData.append('category' , category);
   images.forEach (image => {
       formData.append('images', image)
@@ -85,7 +77,7 @@ useEffect(() => {
           onOpen: () => dispatch(clearProductUpdated())
       })
       setImages([])
-      navigate('/supplier/products')
+      navigate('/admin/products')
       return;
   }
 
@@ -103,6 +95,8 @@ useEffect(() => {
   if(product && product._id) {
       setName(product.name);
       setPrice(product.price);
+      setDiscount(product.discount);
+      setExpiry(product.expiry);
       setStock(product.stock);
       setCategory(product.category);
       
@@ -115,7 +109,7 @@ useEffect(() => {
 },[product])
 
   return (
-    <div className="container1">
+    <div className="container">
       <div className="register">
     <p className="login-title">Update Product</p>
     
@@ -127,6 +121,11 @@ useEffect(() => {
         
         <label className="label" for="price">Price</label><br/>
         <input type="number" onChange={e => setPrice(e.target.value)} value={price} id='price' required placeholder="Price"/><br/><br/>
+        <label className="label" htmlFor="discount">Discount</label><br/>
+        <input type="number" id='discount' onChange={e => setDiscount(e.target.value)} value={discount} required placeholder="Discount"/><br/><br/>
+        <label className="label" htmlFor="expiry">Expiry Date</label><br/>
+        <input type="date" id='expiry' onChange={e => setExpiry(e.target.value)} value={expiry} required placeholder="Expiry Date"/><br/><br/>
+        
         <label className="label"  for="stock">Stock</label><br/>
         <input type="number" onChange={e => setStock(e.target.value)} value={stock} id="stock" required placeholder="Stock"/><br/><br/>
         <label className="label"  for="category">Select category</label><br/>

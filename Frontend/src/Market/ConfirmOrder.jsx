@@ -1,41 +1,49 @@
-import '../Profile/Login.css'
-import {  useEffect } from "react"
 import {  useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
-import {validateShipping} from './Shipping.jsx'
+import { useSelector,useDispatch } from "react-redux"
+import { createOrder } from './actions/orderActions.jsx'
+import { orderCompleted } from './slice/cartSlice.jsx'
+import { toast } from 'react-toastify'
 const ConfirmOrder = () => {
     const navigate=useNavigate()
+    const dispatch = useDispatch()
     const {shippingInfo,items:cartItems}=useSelector(state=>state.cartState)
     const {user}=useSelector(state=>state.authState)
     const itemsPrice=cartItems.reduce((acc,item)=>(acc+item.price*item.quantity),0)
-    const shippingPrice=itemsPrice>200?0:25
-    const totalPrice=itemsPrice+shippingPrice
-    const processPayment=()=>{
-        const data={
-            itemsPrice,
-            shippingPrice,
-            totalPrice
-        }
-        sessionStorage.setItem('orderInfo',JSON.stringify(data))
-        navigate('/payment')
+    
+    const totalPrice=itemsPrice
+    const placeOrderHandler = async() => {
+    const order = {
+        orderItems: cartItems,
+        shippingInfo,
+        itemsPrice,
+        totalPrice
     }
-    useEffect(()=>{
-        validateShipping(shippingInfo, navigate)
-    },[shippingInfo,navigate])
+
+    try {
+        dispatch(orderCompleted()) // clear the cart
+        dispatch(createOrder(order)) // save order
+        toast.success("Order placed successfully")
+        navigate('/order/success') // redirect
+    } catch (error) {
+        toast.error("Failed to place order")
+        console.error(error)
+    }
+}
+    
 
   return (
-    <div className='container1'>
+    <div className='container'>
       
       <div className="cartItem">
             <div className="cartitems">
                 
                 <p className="yourcart" >Shipping Info </p>
                 
-                <p className="shippingdetails" style={{ color: '#f8f8f6' }}>Name: <b>{user.name}</b></p>
+                <p className="shippingdetails" style={{ color: '#151f28' }}>Name: <b>{user.name}</b></p>
                 
-                <p className="shippingdetails" style={{ color: '#f8f8f6', margin: '10px 0' }}>Address: <b>{shippingInfo.address}, {shippingInfo.city}, {shippingInfo.district}</b></p>
+                <p className="shippingdetails" style={{ color: '#151f28', margin: '10px 0' }}>Address: <b>{shippingInfo.address}</b></p>
                 
-                <p className="shippingdetails" style={{ color: '#f8f8f6' }}>Phone Number: <b>{shippingInfo.phoneNo}</b></p><br/>
+                <p className="shippingdetails" style={{ color: '#151f28' }}>Phone Number: <b>{shippingInfo.phoneNo}</b></p><br/>
 
                 <p className="yourcart" >Your Cart: </p>
                 {cartItems.map(item=>(
@@ -59,11 +67,11 @@ const ConfirmOrder = () => {
                 <hr/>
                 <p className="noofitems">Subtotal: <b>Rs. {itemsPrice}</b></p>
                 
-                <p className="noofitems">Shipping: <b>Rs. {shippingPrice}</b></p>
+                
                 <br/>
                 <hr/>
-                <p className="noofitems">Total: <b>Rs. {shippingPrice+itemsPrice}</b></p>
-                <p className="cartbutton" onClick={processPayment}>Proceed to pay</p>
+                <p className="noofitems">Total: <b>Rs. {itemsPrice}</b></p>
+                <p className="profilebutton" onClick={placeOrderHandler}>Place Order</p>
             </div>
             
           
