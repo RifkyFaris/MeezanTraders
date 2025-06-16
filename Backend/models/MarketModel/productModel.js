@@ -9,29 +9,32 @@ const productSchema=new mongoose.Schema({
         required: true,
         default: 0.0
     },
-    description: {
-        type: String,
+    discount: {
+        type: Number,
+        required: true,
+        default: 0.0
     },
-    
+    expiry: {
+        type: Date,
+        required: true,
+        default: 0.0
+    },
+    images: [
+        {
+            image: {
+                type: String,
+                required: true
+            }
+        }
+    ],
     category: {
         type: String,
         required: true,
         enum: {
             values: [
-                'Tyre',
-                'Head Light',
-                'Engine Oil',
-                'Break Oil',
-                'Radiator Coolant',
-                'Break Pads',
-                'Wiper Blades',
-                'Fan Belt',
-                'Clutch Plate',
-                'Rim',
-                'Indicator Light',
-                'Break Light',
-                'Gear Oil',
-                'Horn'
+                'Dairy',
+                'Rice',
+                
             ],
             message : "Please select correct category"
         },

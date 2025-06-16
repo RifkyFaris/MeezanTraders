@@ -8,11 +8,7 @@ const orderSchema=mongoose.Schema({
             required:true
 
         },
-        city:{
-            type:String,
-            required:true
-
-        },
+        
         phoneNo:{
             type:String,
             required:true
@@ -47,34 +43,10 @@ const orderSchema=mongoose.Schema({
             ref:'Product'
         },
     }],
-    itemsPrice:{
-        type:Number,
-        required:true,
-        default:0.0
-    },
-   
-    shippingPrice:{
-        type:Number,
-        required:true,
-        default:0.0
-    },
     totalPrice:{
         type:Number,
         required:true,
         default:0.0
-    },
-    paymentInfo:{
-        id:{
-            type:String,
-            required:true
-        },
-        status:{
-            type:String,
-            required:true
-        }
-    },
-    paidAt:{
-        type:Date
     },
     deliveredAt:{
         type:Date
