@@ -55,7 +55,7 @@ import axios from 'axios';
 export const register=(userData)=>async(dispatch)=>{
     try{
         dispatch(registerRequest())
-        const {data}=await axios.post(`${process.env.BACKEND_URL}/api/register`,userData)
+        const {data}=await axios.post(`/api/register`,userData)
         dispatch(registerSuccess(data))
     }catch(error){
         dispatch(registerFail(error.response.data.message))
@@ -75,7 +75,7 @@ export const clearAuthError=dispatch=>{
 export const login=(phoneNo,password)=>async(dispatch)=>{
     try {
         dispatch(loginRequest())
-        const {data}=await axios.post(`${process.env.BACKEND_URL}/api/login`,{phoneNo,password})
+        const {data}=await axios.post(`/api/login`,{phoneNo,password})
         dispatch(loginSuccess(data))
 
     } catch (error) {
@@ -86,7 +86,7 @@ export const login=(phoneNo,password)=>async(dispatch)=>{
 //logout
 export const logout=async(dispatch)=>{
     try {
-        await axios.get(`${process.env.BACKEND_URL}/api/logout`)
+        await axios.get(`/api/logout`)
         dispatch(logoutSuccess())
     } catch (error) {
         dispatch(logoutFail(error))
@@ -140,7 +140,7 @@ export const forgotPassword=(formData)=>async (dispatch)=>{
                 'Content-type':'application/json'
             }
         }
-        const {data}=await axios.post(`${process.env.BACKEND_URL}/api/password/forgot`,formData,config)
+        const {data}=await axios.post(`/api/password/forgot`,formData,config)
         dispatch(forgotPasswordSuccess(data))
     } catch (error) {
         dispatch(forgotPasswordFail(error.response.data.message))
@@ -156,7 +156,7 @@ export const resetPassword=(formData,token)=>async (dispatch)=>{
                 'Content-type':'application/json'
             }
         }
-        const {data}=await axios.post(`${process.env.BACKEND_URL}/api/password/reset/${token}`,formData,config)
+        const {data}=await axios.post(`/api/password/reset/${token}`,formData,config)
         dispatch(resetPasswordSuccess(data))
     } catch (error) {
         dispatch(resetPasswordFail(error.response.data.message))
@@ -168,7 +168,7 @@ export const getUsers=async (dispatch)=>{
         dispatch(usersRequest())
 
         
-        const {data}=await axios.get(`${process.env.BACKEND_URL}/api/admin/users`)
+        const {data}=await axios.get(`/api/admin/users`)
         dispatch(usersSuccess(data))
     } catch (error) {
         dispatch(usersFail(error.response.data.message))
@@ -181,7 +181,7 @@ export const deleteUser=id=>async (dispatch)=>{
         dispatch(deleteUserRequest())
 
         
-        const {data}=await axios.delete(`${process.env.BACKEND_URL}/api/admin/user/delete/${id}`)
+        const {data}=await axios.delete(`/api/admin/user/delete/${id}`)
         dispatch(deleteUserSuccess(data))
     } catch (error) {
         dispatch(deleteUserFail(error.response.data.message))
@@ -196,7 +196,7 @@ export const updateUser=(id,formData)=>async (dispatch)=>{
                 'Content-type':'application/json'
             }
         }
-        await axios.put(`${process.env.BACKEND_URL}/api/admin/user/update/${id}`,formData,config)
+        await axios.put(`/api/admin/user/update/${id}`,formData,config)
         dispatch(updateUserSuccess())
     } catch (error) {
         dispatch(updateUserFail(error.response.data.message))
