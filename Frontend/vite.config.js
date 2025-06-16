@@ -7,8 +7,5 @@ export default defineConfig({
     proxy: {
       "/api": "https://meezantraders.vercel.app"
     }
-  },
-  optimizeDeps: {
-    include: ['jspdf', 'jspdf-autotable'] // 👈 Key fix for Vercel build
   }
 })
