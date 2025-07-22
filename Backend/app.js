@@ -9,11 +9,11 @@ const product=require('./routes/MarketRoutes/productRoutes.js')
 const order=require('./routes/MarketRoutes/order.js')
 
 
-
+dotenv.config({path:path.join(__dirname,"config/config.env")});
 
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.FRONTEND_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true
   }));
