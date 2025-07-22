@@ -25,6 +25,11 @@ export default function ProductDetail(){
     setQuantity((prevQty) => prevQty - 1);
 
     };
+    const getImageUrl = (originalUrl) => {
+    if (!originalUrl) return '';
+    const filename = originalUrl.split('/').pop();
+    return `https://meezantraders.onrender.com/proxy-image/${filename}`;
+  };
     useEffect(()=>{
         dispatch(getProduct(id))
     },[id,dispatch])
@@ -39,7 +44,7 @@ export default function ProductDetail(){
         
             <div className="image">
               
-              <img src={product?.images?.[0]?.image } className="productDetailImg"/>
+              <img src={getImageUrl(product?.images?.[0]?.image)} className="productDetailImg"/>
             </div>
             <div className="productdetails">
               <p className="pname">{product.name}</p>
