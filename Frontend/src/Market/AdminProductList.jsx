@@ -7,9 +7,9 @@ import {toast } from 'react-toastify'
 import { clearProductDeleted } from './slice/productSlice'
 
 import { IoTrashBin } from "react-icons/io5";
-import jsPDF from "jspdf"
+
 import { FaPen } from "react-icons/fa";
-import "jspdf-autotable"
+
 import {Link} from 'react-router-dom'
 
 export default function AdminProductList() {
@@ -110,72 +110,7 @@ export default function AdminProductList() {
         dispatch(getAdminProducts)
     },[dispatch, error, isProductDeleted])
 
-    const generatePDF = () => {
-    const doc = new jsPDF();
-
-    const marginLeft = 14;
-    const colWidths = [50, 30, 30, 50]; // Column widths: adjust as needed
-    const rowHeight = 10;
-    const pageHeight = doc.internal.pageSize.height;
-
-    // Title
-    doc.setFontSize(16);
-    doc.setFont(undefined, "bold");
-    doc.text("Admin Product List", marginLeft, 20);
-
-    // Header
-    const headers = ["Name", "Price", "Stock", "User"];
-    let currentY = 30;
-
-    doc.setFontSize(12);
-    doc.setFont(undefined, "bold");
-
-    let x = marginLeft;
-    headers.forEach((header, i) => {
-        doc.text(header, x, currentY);
-        x += colWidths[i];
-    });
-
-    // Horizontal line below header
-    doc.setLineWidth(0.5);
-    doc.line(marginLeft, currentY + 2, marginLeft + colWidths.reduce((a, b) => a + b, 0), currentY + 2);
-
-    currentY += rowHeight;
-
-    // Table body
-    doc.setFont(undefined, "normal");
-
-    products.forEach(product => {
-        const row = [
-            product.name || "N/A",
-            `Rs. ${product.price}`,
-            String(product.stock),
-            product.user || "N/A"
-        ];
-
-        let x = marginLeft;
-        row.forEach((cell, i) => {
-            doc.text(cell, x, currentY);
-            x += colWidths[i];
-        });
-
-        currentY += rowHeight;
-
-        // Line after each row
-        doc.setDrawColor(200); // Light grey
-        doc.line(marginLeft, currentY - 5, marginLeft + colWidths.reduce((a, b) => a + b, 0), currentY - 5);
-
-        // Add new page if necessary
-        if (currentY + rowHeight > pageHeight - 10) {
-            doc.addPage();
-            currentY = 20;
-        }
-    });
-
-    // Save the PDF
-    doc.save("admin-product-list.pdf");
-};
-
+    
 
 
 
@@ -183,8 +118,7 @@ export default function AdminProductList() {
   return (
     <div className='container'>
         <div className="register">
-        <button style={{color:"black",background:"white",width:"150px",marginLeft:"20px",padding:"10px",fontSize:"13px",borderRadius:"6px"}}  onClick={generatePDF}>Download pdf</button>
-
+        
         <Fragment>
                 {loading ? <></> : 
                     <MDBDataTable
