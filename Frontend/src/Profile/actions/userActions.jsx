@@ -55,7 +55,7 @@ import axios from 'axios';
 export const register=(userData)=>async(dispatch)=>{
     try{
         dispatch(registerRequest())
-        const {data}=await axios.post(`https://meezantraders.vercel.app/api/register`,userData)
+        const {data}=await axios.post(`https://meezantraders.onrender.com/api/register`,userData)
         dispatch(registerSuccess(data))
     }catch(error){
         dispatch(registerFail(error.response.data.message))
@@ -75,7 +75,7 @@ export const clearAuthError=dispatch=>{
 export const login=(phoneNo,password)=>async(dispatch)=>{
     try {
         dispatch(loginRequest())
-        const {data}=await axios.post(`https://meezantraders.vercel.app/api/login`,{phoneNo,password})
+        const {data}=await axios.post(`https://meezantraders.onrender.com/api/login`,{phoneNo,password})
         dispatch(loginSuccess(data))
 
     } catch (error) {
@@ -86,7 +86,7 @@ export const login=(phoneNo,password)=>async(dispatch)=>{
 //logout
 export const logout=async(dispatch)=>{
     try {
-        await axios.get(`https://meezantraders.vercel.app/api/logout`)
+        await axios.get(`https://meezantraders.onrender.com/api/logout`)
         dispatch(logoutSuccess())
     } catch (error) {
         dispatch(logoutFail(error))
@@ -96,7 +96,7 @@ export const logout=async(dispatch)=>{
 export const loadUser=async(dispatch)=>{
     try {
         dispatch(loadUserRequest())
-        const {data} =await axios.get(`https://meezantraders.vercel.app/api/myprofile`,{withCredentials:true})
+        const {data} =await axios.get(`https://meezantraders.onrender.com/api/myprofile`,{withCredentials:true})
         dispatch(loadUserSuccess(data))
     } catch (error) {
         dispatch(loadUserFail(error.response.data.message))
@@ -107,7 +107,7 @@ export const updateProfile=(userData)=>async (dispatch)=>{
         dispatch(updateProfileRequest())
         
         
-        const {data}=await axios.put(`https://meezantraders.vercel.app/api/update`,userData,{withCredentials:true})
+        const {data}=await axios.put(`https://meezantraders.onrender.com/api/update`,userData,{withCredentials:true})
         console.log(data.name)
         dispatch(updateProfileSuccess(data))
     } catch (error) {
@@ -124,7 +124,7 @@ export const updatePassword=(formData)=>async (dispatch)=>{
                 'Content-type':'application/json'
             }
         }
-        await axios.put(`https://meezantraders.vercel.app/api/password/change`,formData,config,{withCredentials:true})
+        await axios.put(`https://meezantraders.onrender.com/api/password/change`,formData,config,{withCredentials:true})
         dispatch(updatePasswordSuccess())
     } catch (error) {
         dispatch(updatePasswordFail(error.response.data.message))
@@ -140,7 +140,7 @@ export const forgotPassword=(formData)=>async (dispatch)=>{
                 'Content-type':'application/json'
             }
         }
-        const {data}=await axios.post(`https://meezantraders.vercel.app/api/password/forgot`,formData,config)
+        const {data}=await axios.post(`https://meezantraders.onrender.com/api/password/forgot`,formData,config)
         dispatch(forgotPasswordSuccess(data))
     } catch (error) {
         dispatch(forgotPasswordFail(error.response.data.message))
@@ -156,7 +156,7 @@ export const resetPassword=(formData,token)=>async (dispatch)=>{
                 'Content-type':'application/json'
             }
         }
-        const {data}=await axios.post(`https://meezantraders.vercel.app/api/password/reset/${token}`,formData,config)
+        const {data}=await axios.post(`https://meezantraders.onrender.com/api/password/reset/${token}`,formData,config)
         dispatch(resetPasswordSuccess(data))
     } catch (error) {
         dispatch(resetPasswordFail(error.response.data.message))
@@ -168,7 +168,7 @@ export const getUsers=async (dispatch)=>{
         dispatch(usersRequest())
 
         
-        const {data}=await axios.get(`https://meezantraders.vercel.app/api/admin/users`,{withCredentials:true})
+        const {data}=await axios.get(`https://meezantraders.onrender.com/api/admin/users`,{withCredentials:true})
         dispatch(usersSuccess(data))
     } catch (error) {
         dispatch(usersFail(error.response.data.message))
@@ -181,7 +181,7 @@ export const deleteUser=id=>async (dispatch)=>{
         dispatch(deleteUserRequest())
 
         
-        const {data}=await axios.delete(`https://meezantraders.vercel.app/api/admin/user/delete/${id}`,{withCredentials:true})
+        const {data}=await axios.delete(`https://meezantraders.onrender.com/api/admin/user/delete/${id}`,{withCredentials:true})
         dispatch(deleteUserSuccess(data))
     } catch (error) {
         dispatch(deleteUserFail(error.response.data.message))
@@ -196,7 +196,7 @@ export const updateUser=(id,formData)=>async (dispatch)=>{
                 'Content-type':'application/json'
             }
         }
-        await axios.put(`https://meezantraders.vercel.app/api/admin/user/update/${id}`,formData,config,{withCredentials:true})
+        await axios.put(`https://meezantraders.onrender.com/api/admin/user/update/${id}`,formData,config,{withCredentials:true})
         dispatch(updateUserSuccess())
     } catch (error) {
         dispatch(updateUserFail(error.response.data.message))
