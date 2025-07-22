@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 const UpdateProduct = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
+  const [cost, setCost] = useState("");
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState(0);
   const [images, setImages] = useState([]);
@@ -23,6 +24,20 @@ const UpdateProduct = () => {
   const { loading, isProductUpdated, error, product } = useSelector( state => state.productState)
   const categories=[
     'Dairy',
+                'Beverages',
+                'Rice',
+                'Food Cupboard',
+                'Household',
+                'Cooking Essentials',
+                'Bakery',
+                'Frozen',
+                'Dry Fish',
+                'Snacks',
+                'Seeds',
+                'Spices',
+                'Health & Beauty',
+                'Private',
+                'Offer'
     
 ];
 
@@ -55,6 +70,7 @@ const submitHandler = (e) => {
   const formData = new FormData();
   formData.append('name' , name);
   formData.append('price' , price);
+  formData.append('cost' , cost);
   formData.append('stock' , stock);
   formData.append('discount',discount);
   formData.append('expiry',expiry);
@@ -95,6 +111,7 @@ useEffect(() => {
   if(product && product._id) {
       setName(product.name);
       setPrice(product.price);
+      setCost(product.cost);
       setDiscount(product.discount);
       setExpiry(product.expiry);
       setStock(product.stock);
@@ -123,6 +140,8 @@ useEffect(() => {
         <input type="number" onChange={e => setPrice(e.target.value)} value={price} id='price' required placeholder="Price"/><br/><br/>
         <label className="label" htmlFor="discount">Discount</label><br/>
         <input type="number" id='discount' onChange={e => setDiscount(e.target.value)} value={discount} required placeholder="Discount"/><br/><br/>
+        <label className="label" for="cost">Cost</label><br/>
+        <input type="number" onChange={e => setCost(e.target.value)} value={cost} id='cost' required placeholder="Cost"/><br/><br/>
         <label className="label" htmlFor="expiry">Expiry Date</label><br/>
         <input type="date" id='expiry' onChange={e => setExpiry(e.target.value)} value={expiry} required placeholder="Expiry Date"/><br/><br/>
         

@@ -55,7 +55,7 @@ import axios from 'axios';
 export const register=(userData)=>async(dispatch)=>{
     try{
         dispatch(registerRequest())
-        const {data}=await axios.post(`https://meezantraders.onrender.com/api/register`,userData)
+        const {data}=await axios.post('/api/register',userData)
         dispatch(registerSuccess(data))
     }catch(error){
         dispatch(registerFail(error.response.data.message))
@@ -67,15 +67,56 @@ export const clearAuthError=dispatch=>{
     dispatch(clearError())
 }
 
+//Supplier register
+export const supplierRegister=(userData)=>async(dispatch)=>{
+    try{
+        dispatch(supplierRegisterRequest())
+        const {data}=await axios.post('/api/register/supplier',userData)
+        dispatch(supplierRegisterSuccess(data))
+    }catch(error){
+        dispatch(supplierRegisterFail(error.response.data.message))
+    }
+}
 
+//mechanic register
+export const mechanicRegister=(userData)=>async(dispatch)=>{
+    try{
+        dispatch(mechanicRegisterRequest())
+        const {data}=await axios.post('/api/register/mechanic',userData)
+        dispatch(mechanicRegisterSuccess(data))
+    }catch(error){
+        dispatch(mechanicRegisterFail(error.response.data.message))
+    }
+}
 
+//wash register
+export const washRegister=(userData)=>async(dispatch)=>{
+    try{
+        dispatch(washRegisterRequest())
+        const {data}=await axios.post('/api/register/carwash',userData)
+        dispatch(washRegisterSuccess(data))
+    }catch(error){
+        dispatch(washRegisterFail(error.response.data.message))
+    }
+}
+
+//towing register
+export const towingRegister=(userData)=>async(dispatch)=>{
+    try{
+        dispatch(towingRegisterRequest())
+        const {data}=await axios.post('/api/register/towing',userData)
+        dispatch(towingRegisterSuccess(data))
+    }catch(error){
+        dispatch(towingRegisterFail(error.response.data.message))
+    }
+}
 
 
 //login
 export const login=(phoneNo,password)=>async(dispatch)=>{
     try {
         dispatch(loginRequest())
-        const {data}=await axios.post(`https://meezantraders.onrender.com/api/login`,{phoneNo,password})
+        const {data}=await axios.post('/api/login',{phoneNo,password})
         dispatch(loginSuccess(data))
 
     } catch (error) {
@@ -86,7 +127,7 @@ export const login=(phoneNo,password)=>async(dispatch)=>{
 //logout
 export const logout=async(dispatch)=>{
     try {
-        await axios.get(`https://meezantraders.onrender.com/api/logout`)
+        await axios.get('/api/logout')
         dispatch(logoutSuccess())
     } catch (error) {
         dispatch(logoutFail(error))
@@ -96,7 +137,7 @@ export const logout=async(dispatch)=>{
 export const loadUser=async(dispatch)=>{
     try {
         dispatch(loadUserRequest())
-        const {data} =await axios.get(`https://meezantraders.onrender.com/api/myprofile`,{withCredentials:true})
+        const {data} =await axios.get('/api/myprofile')
         dispatch(loadUserSuccess(data))
     } catch (error) {
         dispatch(loadUserFail(error.response.data.message))
@@ -107,7 +148,7 @@ export const updateProfile=(userData)=>async (dispatch)=>{
         dispatch(updateProfileRequest())
         
         
-        const {data}=await axios.put(`https://meezantraders.onrender.com/api/update`,userData,{withCredentials:true})
+        const {data}=await axios.put(`/api/update`,userData)
         console.log(data.name)
         dispatch(updateProfileSuccess(data))
     } catch (error) {
@@ -124,7 +165,7 @@ export const updatePassword=(formData)=>async (dispatch)=>{
                 'Content-type':'application/json'
             }
         }
-        await axios.put(`https://meezantraders.onrender.com/api/password/change`,formData,config,{withCredentials:true})
+        await axios.put(`/api/password/change`,formData,config)
         dispatch(updatePasswordSuccess())
     } catch (error) {
         dispatch(updatePasswordFail(error.response.data.message))
@@ -140,7 +181,7 @@ export const forgotPassword=(formData)=>async (dispatch)=>{
                 'Content-type':'application/json'
             }
         }
-        const {data}=await axios.post(`https://meezantraders.onrender.com/api/password/forgot`,formData,config)
+        const {data}=await axios.post(`/api/password/forgot`,formData,config)
         dispatch(forgotPasswordSuccess(data))
     } catch (error) {
         dispatch(forgotPasswordFail(error.response.data.message))
@@ -156,7 +197,7 @@ export const resetPassword=(formData,token)=>async (dispatch)=>{
                 'Content-type':'application/json'
             }
         }
-        const {data}=await axios.post(`https://meezantraders.onrender.com/api/password/reset/${token}`,formData,config)
+        const {data}=await axios.post(`/api/password/reset/${token}`,formData,config)
         dispatch(resetPasswordSuccess(data))
     } catch (error) {
         dispatch(resetPasswordFail(error.response.data.message))
@@ -168,7 +209,7 @@ export const getUsers=async (dispatch)=>{
         dispatch(usersRequest())
 
         
-        const {data}=await axios.get(`https://meezantraders.onrender.com/api/admin/users`,{withCredentials:true})
+        const {data}=await axios.get(`/api/admin/users`)
         dispatch(usersSuccess(data))
     } catch (error) {
         dispatch(usersFail(error.response.data.message))
@@ -181,7 +222,7 @@ export const deleteUser=id=>async (dispatch)=>{
         dispatch(deleteUserRequest())
 
         
-        const {data}=await axios.delete(`https://meezantraders.onrender.com/api/admin/user/delete/${id}`,{withCredentials:true})
+        const {data}=await axios.delete(`/api/admin/user/delete/${id}`)
         dispatch(deleteUserSuccess(data))
     } catch (error) {
         dispatch(deleteUserFail(error.response.data.message))
@@ -196,7 +237,7 @@ export const updateUser=(id,formData)=>async (dispatch)=>{
                 'Content-type':'application/json'
             }
         }
-        await axios.put(`https://meezantraders.onrender.com/api/admin/user/update/${id}`,formData,config,{withCredentials:true})
+        await axios.put(`/api/admin/user/update/${id}`,formData,config)
         dispatch(updateUserSuccess())
     } catch (error) {
         dispatch(updateUserFail(error.response.data.message))

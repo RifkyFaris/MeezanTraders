@@ -37,6 +37,7 @@ import UserList from './Profile/UserList.jsx'
 import OutOfStockList from './Market/OutOfStockList.jsx'
 import ExpiredList from './Market/ExpiredList.jsx'
 import ProcessingList from './Market/ProcessingList.jsx'
+import Category from './Market/Category.jsx'
 
 
 
@@ -61,6 +62,7 @@ function App() {
           <Route path="/order/confirm" element={<ProtectedRoute><ConfirmOrder/></ProtectedRoute>}/>
           <Route path="/new/product" element={<ProtectedRoute isAdmin={true}><AddProduct/></ProtectedRoute>}/>
           <Route path="/product/:id" element={<ProductDetail/>}/>
+          <Route path="/category/:cat" element={<Category/>}/>
           <Route path="/shipping" element={<ProtectedRoute ><Shipping/></ProtectedRoute>}/>
           
           <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDAshboard/></ProtectedRoute>}/>

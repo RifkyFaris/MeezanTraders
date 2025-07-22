@@ -1,10 +1,10 @@
 import { IoTrashBin } from "react-icons/io5";
-import { Fragment } from "react"
 import {useSelector,useDispatch} from 'react-redux'
 import {Link, useNavigate} from 'react-router-dom'
 import { createOrder } from './actions/orderActions.jsx';
 import { orderCompleted } from './slice/cartSlice.jsx';
 import { toast } from 'react-toastify';
+import {Fragment,useEffect}  from 'react'
 
 
 
@@ -16,6 +16,10 @@ export default function cart(){
     address: "POS Order",
     phoneNo: "0542224281"
   };
+  useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
   const orderStatus="Delivered"
   
       const {isAuthenticated,user}=useSelector(state=>state.authState)
@@ -76,7 +80,7 @@ export default function cart(){
           body { font-family: monospace; width: 60mm; padding: 10px; }
           .receipt-title { text-align: center; font-weight: bold; font-size: 16px; margin-bottom: 10px; }
           .line { border-top: 1px dashed #000; margin: 5px 0; }
-          .item { display: flex; justify-content: space-between; font-size: 12px; }
+          .item { font-size: 12px; margin-bottom: 4px; }
           .footer { margin-top: 10px; text-align: center; font-size: 12px; }
         </style>
       </head>
@@ -88,8 +92,11 @@ export default function cart(){
         <div class="line"></div>
         ${order.orderItems.map(item => `
           <div class="item">
-            <span>${item.name} x${item.quantity}</span>
-            <span>Rs.${item.price * item.quantity}</span>
+            <div>${item.name}</div>
+            <div style="display: flex; justify-content: space-between;">
+              <span>${item.quantity} x Rs.${item.price}</span>
+              <span>Rs.${item.quantity * item.price}</span>
+            </div>
           </div>
         `).join('')}
         <div class="line"></div>
@@ -109,6 +116,7 @@ export default function cart(){
   receiptWindow.print();
   receiptWindow.close();
 };
+
 const placeAndPrintOrderHandler = async () => {
   if (items.length === 0) {
     toast.warn("Cannot place order: empty cart");
@@ -189,9 +197,9 @@ const placeAndPrintOrderHandler = async () => {
   </>
 )}
 
-{isAuthenticated && user.role === 'user' && (
+
   <p className="profilebutton" onClick={checkOutHandler}>Cash On Delivery</p>
-)}
+
      
     </div>
     

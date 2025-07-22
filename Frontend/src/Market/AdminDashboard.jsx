@@ -28,8 +28,9 @@ const AdminDAshboard = () => {
     dispatch(getUsers);
     
      dispatch(lowstock());
-     dispatch(ex())
+     
      dispatch(processingOrders());
+     dispatch(ex())
    
   }, [])
   return (

@@ -37,6 +37,12 @@ body{
 
 
 }
+.category_img{
+ width:120px;
+  border-radius: 10px;
+ margin: 2px;
+ border:1px solid var(--back)
+}
 .table th{
   width: 100px;
   text-align: left;
@@ -980,6 +986,30 @@ margin-top: 10px;
     height: 90px;
     margin-left: 0px;
 }
+.category-container {
+    
+    border-radius: var(--br);
+    background-color: #fff;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  scroll-behavior: smooth;
+}
+
+.category-container::-webkit-scrollbar {
+  display: none; /* Hides scrollbar for a cleaner look */
+}
+
+.category_img {
+  flex: 0 0 auto;
+  width: 95px; /* Adjust width as needed */
+  height: 95px;
+  object-fit: cover;
+  scroll-snap-align: start;
+  border-radius: 10px;
+}
+
 .price-div{
     display: flex;
     justify-content: space-between;

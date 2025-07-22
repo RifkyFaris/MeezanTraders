@@ -40,7 +40,7 @@ const ProducSearch = () => {
           <h2 className="category-heading">Search Product</h2>
           <div className="products">
           {products && products.map(product=>(
-                    <Product  key={product._id} product={product}/>
+                   <Link to={`/product/${product._id}`}><Product  key={product._id} product={product}/></Link>
                   ))}
             
           </div>

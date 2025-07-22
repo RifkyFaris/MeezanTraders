@@ -10,6 +10,8 @@ const NewProduct = () => {
     const [name,setName]=useState("");
     const[price,setPrice]=useState("");
     const[discount,setDiscount]=useState("");
+    const[cost,setCost]=useState("");
+    const[barcode,setBarcode]=useState("");
     const[category,setCategory]=useState("");
     const [expiry, setExpiry] = useState("");
     const[stock,setStock]=useState("");
@@ -19,6 +21,18 @@ const NewProduct = () => {
     const { user } = useSelector(state => state.authState); 
     const categories=[
         'Dairy',
+        'Beverages',
+        'Rice',
+        'Food Cupboard',
+        'Household',
+        'Cooking Essentials',
+        'Bakery',
+        'Frozen',
+        'Dry Fish',
+        'Snacks',
+        'Seeds',
+        'Spices',
+        'Health & Beauty'
         
     ];
     const navigate=useNavigate();
@@ -48,6 +62,8 @@ const NewProduct = () => {
         const formData=new FormData()
         formData.append('name',name);
         formData.append('price',price);
+        formData.append('cost',cost);
+        formData.append('barcode',barcode);
         formData.append('discount',discount);
         formData.append('expiry',expiry);
         formData.append('category',category);
@@ -94,7 +110,13 @@ const NewProduct = () => {
         <input type="number" id='price' onChange={e => setPrice(e.target.value)} value={price} required placeholder="Price"/><br/><br/>
         <label className="label" htmlFor="discount">Discount</label><br/>
         <input type="number" id='discount' onChange={e => setDiscount(e.target.value)} value={discount} required placeholder="Discount"/><br/><br/>
+        <label className="label" htmlFor="cost">Cost</label><br/>
+        <input type="number" id='cost' onChange={e => setCost(e.target.value)} value={cost} required placeholder="Cost"/><br/><br/>
+        <label className="label" htmlFor="barcode">Barcode</label><br/>
+        <input type="text" id='barcode' onChange={e => setBarcode(e.target.value)} value={barcode} placeholder="Barcode"/><br/><br/>
+        
         <label className="label" htmlFor="expiry">Expiry Date</label><br/>
+        
         <input type="date" id='expiry' onChange={e => setExpiry(e.target.value)} value={expiry} required placeholder="Expiry Date"/><br/><br/>
         <label className="label"  htmlFor="stock">Stock</label><br/>
         <input type="number" id="stock" onChange={e => setStock(e.target.value)} value={stock} required placeholder="Stock"/><br/><br/>
