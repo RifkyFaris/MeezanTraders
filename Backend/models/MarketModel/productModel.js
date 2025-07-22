@@ -14,10 +14,17 @@ const productSchema=new mongoose.Schema({
         required: true,
         default: 0.0
     },
+    cost: {
+        type: Number,
+        default: 0.0
+    },
     expiry: {
         type: Date,
         required: true,
         default: 0.0
+    },
+    barcode:{
+        type: String,
     },
     images: [
         {
@@ -33,7 +40,20 @@ const productSchema=new mongoose.Schema({
         enum: {
             values: [
                 'Dairy',
+                'Beverages',
                 'Rice',
+                'Food Cupboard',
+                'Household',
+                'Cooking Essentials',
+                'Bakery',
+                'Frozen',
+                'Dry Fish',
+                'Snacks',
+                'Seeds',
+                'Spices',
+                'Health & Beauty',
+                'Private',
+                'Offer'
                 
             ],
             message : "Please select correct category"

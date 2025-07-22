@@ -64,7 +64,7 @@ exports.loginUser=async(req,res,next)=>{
         service:'gmail',
         auth:{
             user:'rifdhi9@gmail.com',
-            pass:'pass',
+            pass:'kkew ghao rlnt axgi',
         }
     })
     
@@ -145,7 +145,10 @@ exports.forgotPassword =  async (req, res, next)=>{
     }
     const resettoken=user.getResetToken();
     await user.save({validateBeforeSave:false});
-
+    let BASE_URL = process.env.FRONTEND_URL;
+    if(process.env.NODE_ENV === "production"){
+        BASE_URL = `${req.protocol}://${req.get('host')}`
+    } 
     const resetUrl=`${process.env.FRONTEND_URL}/password/reset/${resettoken}`;
     const message=`your password reset token \n\n
     ${resetUrl} \n\n

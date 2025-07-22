@@ -7,7 +7,23 @@ const {
     getAdminProducts,
     getProducts,
     getExpiringSoonProducts,
-    getLowStockProducts
+    getLowStockProducts,
+    getCategoryProducts,
+    getRandomDairyProducts,
+    getRandomBeverageProducts,
+    getRandomBakeryProducts,
+    getRandomCookingEssentialsProducts,
+    getRandomDryFishProducts,
+    getRandomFoodCupboardProducts,
+    getRandomFrozenProducts,
+    getRandomHealthProducts,
+    getRandomHouseholdProducts,
+    getRandomOfferProducts,
+    getRandomRiceProducts,
+    getRandomSeedsProducts,
+    getRandomSnacksProducts,
+    getRandomSpicesProducts,
+    
     
 
 } =require('../../controllers/MarketController/productController.js');
@@ -24,6 +40,22 @@ const upload = multer({storage: multer.diskStorage({
         cb(null, file.originalname)
     }
 }) })
+router.route('/api/health/random').get(getRandomHealthProducts);
+router.route('/api/house/random').get(getRandomHouseholdProducts);
+router.route('/api/offer/random').get(getRandomOfferProducts);
+router.route('/api/rice/random').get(getRandomRiceProducts);
+router.route('/api/seed/random').get(getRandomSeedsProducts);
+router.route('/api/snacks/random').get(getRandomSnacksProducts);
+router.route('/api/spices/random').get(getRandomSpicesProducts);
+
+router.route('/api/frozen/random').get(getRandomFrozenProducts);
+router.route('/api/foodcupboard/random').get(getRandomFoodCupboardProducts);
+router.route('/api/dry/random').get(getRandomDryFishProducts);
+router.route('/api/cooking/random').get(getRandomCookingEssentialsProducts);
+router.route('/api/bakery/random').get(getRandomBakeryProducts);
+router.route('/api/beverages/random').get(getRandomBeverageProducts);
+router.route('/api/dairy/random').get(getRandomDairyProducts);
+router.route('/api/category/:cat').get(getCategoryProducts);
 router.route('/api/products').get(getProducts);
 router.route('/api/product/:id').get(getSingleProduct);
 
