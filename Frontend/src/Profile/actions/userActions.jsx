@@ -117,6 +117,7 @@ export const login=(phoneNo,password)=>async(dispatch)=>{
     try {
         dispatch(loginRequest())
         const {data}=await axios.post('https://meezantraders.onrender.com/api/login',{phoneNo,password})
+        localStorage.setItem('token', data.token);
         dispatch(loginSuccess(data))
 
     } catch (error) {
