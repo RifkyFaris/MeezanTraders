@@ -113,17 +113,21 @@ export const towingRegister=(userData)=>async(dispatch)=>{
 
 
 //login
-export const login=(phoneNo,password)=>async(dispatch)=>{
-    try {
-        dispatch(loginRequest())
-        const {data}=await axios.post('https://meezantraders.onrender.com/api/login',{phoneNo,password})
-        localStorage.setItem('token', data.token);
-        dispatch(loginSuccess(data))
-
-    } catch (error) {
-        dispatch(loginFail(error.response.data.message))
-    }
+// Set token cookie helper
+function setTokenCookie(token) {
+  document.cookie = `token=${token};path=/;max-age=${7 * 24 * 60 * 60};SameSite=Lax`;
 }
+
+export const login = (phoneNo, password) => async (dispatch) => {
+  try {
+    dispatch(loginRequest());
+    const { data } = await axios.post('https://meezantraders.onrender.com/api/login', { phoneNo, password });
+    setTokenCookie(data.token);
+    dispatch(loginSuccess(data));
+  } catch (error) {
+    dispatch(loginFail(error.response.data.message));
+  }
+};
 
 //logout
 export const logout=async(dispatch)=>{
