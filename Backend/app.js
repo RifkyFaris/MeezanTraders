@@ -10,7 +10,7 @@ const product = require('./routes/MarketRoutes/productRoutes.js');
 const order = require('./routes/MarketRoutes/order.js');
 
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
