@@ -10,7 +10,7 @@ const product = require('./routes/MarketRoutes/productRoutes.js');
 const order = require('./routes/MarketRoutes/order.js');
 
 app.use(cors({
-  origin: 'https://meezantraders.onrender.com',
+  origin: 'https://meezantraders-home.onrender.com',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
@@ -43,4 +43,5 @@ app.get('/proxy-image/:filename', async (req, res) => {
 });
 
 module.exports = app;
+
 
