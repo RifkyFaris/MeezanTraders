@@ -143,7 +143,8 @@ export const logout=async(dispatch)=>{
 export const loadUser=async(dispatch)=>{
     try {
         dispatch(loadUserRequest())
-        const {data} =await axios.get('https://meezantraders.onrender.com/api/myprofile')
+        const {data} =await axios.get('https://meezantraders.onrender.com/api/myprofile',,
+  { withCredentials: true })
         dispatch(loadUserSuccess(data))
     } catch (error) {
         dispatch(loadUserFail(error.response.data.message))
@@ -249,4 +250,5 @@ export const updateUser=(id,formData)=>async (dispatch)=>{
         dispatch(updateUserFail(error.response.data.message))
     }
 }
+
 
