@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": "https://meezantraders.vercel.app"
+      "/api": "https://meezantraders-home.onrender.com"
     }
   },
   
