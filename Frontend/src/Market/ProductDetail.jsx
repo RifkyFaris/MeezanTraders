@@ -44,7 +44,7 @@ export default function ProductDetail(){
         
             <div className="image">
               
-              <img src={getImageUrl(product.images[0].image)} className="productDetailImg"/>
+              <img src={getImageUrl(product?.images?.[0]?.image)} className="productDetailImg"/>
             </div>
             <div className="productdetails">
               <p className="pname">{product.name}</p>
@@ -73,5 +73,6 @@ export default function ProductDetail(){
     </Fragment>
   )
 }
+
 
 
