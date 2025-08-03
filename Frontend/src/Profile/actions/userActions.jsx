@@ -121,7 +121,8 @@ function setTokenCookie(token) {
 export const login = (phoneNo, password) => async (dispatch) => {
   try {
     dispatch(loginRequest());
-    const { data } = await axios.post('https://meezantraders.onrender.com/api/login', { phoneNo, password });
+    const { data } = await axios.post('https://meezantraders.onrender.com/api/login', { phoneNo, password },,
+  { withCredentials: true });
     setTokenCookie(data.token);
     dispatch(loginSuccess(data));
   } catch (error) {
@@ -248,3 +249,4 @@ export const updateUser=(id,formData)=>async (dispatch)=>{
         dispatch(updateUserFail(error.response.data.message))
     }
 }
+
