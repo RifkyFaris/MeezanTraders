@@ -28,6 +28,11 @@ export default function ProductDetail(){
     useEffect(()=>{
         dispatch(getProduct(id))
     },[id,dispatch])
+    function getImageUrl(originalUrl) {
+    if (!originalUrl) return '';
+    const filename = originalUrl.split('/').pop();
+    return `https://meezantraders.onrender.com/proxy-image/${filename}`;
+  }
 
 
   return (
@@ -68,3 +73,4 @@ export default function ProductDetail(){
     </Fragment>
   )
 }
+
