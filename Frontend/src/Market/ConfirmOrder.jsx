@@ -14,7 +14,12 @@ const ConfirmOrder = () => {
     const {shippingInfo,items:cartItems}=useSelector(state=>state.cartState)
     const {user}=useSelector(state=>state.authState)
     const itemsPrice=cartItems.reduce((acc,item)=>(acc+item.price*item.quantity),0)
-    
+    // Convert original local URL to proxy URL
+  function getImageUrl(originalUrl) {
+    if (!originalUrl) return '';
+    const filename = originalUrl.split('/').pop();
+    return `https://meezantraders.onrender.com/proxy-image/${filename}`;
+  }
     const totalPrice=itemsPrice
     const placeOrderHandler = async() => {
     const order = {
@@ -57,7 +62,7 @@ const ConfirmOrder = () => {
 
                 <div className="cartdisplayitem">
                     
-                    <img src={item.image} className="cartitemimage"/>
+                    <img src={getImageUrl(item.image)} className="cartitemimage"/>
                     <p className="cartdisplayname">{item.name}</p>
                     <p className="cartdisplayprice">{item.quantity} x Rs. {item.price} = <b>Rs. {item.quantity*item.price}</b></p>
                     
