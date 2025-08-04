@@ -72,7 +72,7 @@ exports.loginUser=async(req,res,next)=>{
         from:'rifdhi9@gmail.com',
         to:user.email,
         subject:"Login success",
-        text:"Login success to "
+        text:"Login success to meezantraders.lk"
     }
     sender.sendMail(mailOptions,(error,info)=>{
         if(error){
@@ -158,7 +158,7 @@ exports.forgotPassword =  async (req, res, next)=>{
             service:'gmail',
             auth:{
                 user:'rifdhi9@gmail.com',
-                pass:'pass',
+                pass:'kkew ghao rlnt axgi',
             }
         })
         
