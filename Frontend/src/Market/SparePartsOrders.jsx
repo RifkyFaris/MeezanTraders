@@ -9,6 +9,10 @@ import { deleteOrder, adminOrders as adminOrdersAction } from "./actions/orderAc
 import { clearError, clearOrderDeleted } from "./slice/orderSlice"
 
 const SparePartsOrders = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
     const { adminOrders = [], loading = true, error, isOrderDeleted }  = useSelector(state => state.orderState)
 
     const dispatch = useDispatch();

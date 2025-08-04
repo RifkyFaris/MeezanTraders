@@ -7,6 +7,10 @@ import { FaPen } from "react-icons/fa";
 import {Link} from 'react-router-dom'
 
 export default function ExpiredList() {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
     const { expiry = [], loading = true, error }  = useSelector(state => state.productState)
     
     const setProducts = () => {

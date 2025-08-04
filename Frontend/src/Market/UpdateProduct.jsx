@@ -8,6 +8,10 @@ import { clearError } from './slice/productsSlice';
 import { toast } from "react-toastify";
 
 const UpdateProduct = () => {
+  useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [cost, setCost] = useState("");
@@ -24,20 +28,17 @@ const UpdateProduct = () => {
   const { loading, isProductUpdated, error, product } = useSelector( state => state.productState)
   const categories=[
     'Dairy',
-                'Beverages',
-                'Rice',
-                'Food Cupboard',
-                'Household',
-                'Cooking Essentials',
-                'Bakery',
-                'Frozen',
-                'Dry Fish',
-                'Snacks',
-                'Seeds',
-                'Spices',
-                'Health & Beauty',
-                'Private',
-                'Offer'
+        'Beverages',
+        'Rice',
+        'Food Cupboard',
+        'Household',
+        'Cooking Essentials',
+        'Frozen',
+        'Snacks',
+        'Spices',
+        'Health & Beauty',
+        'Private',
+        'Offer'
     
 ];
 

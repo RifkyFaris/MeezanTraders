@@ -4,6 +4,10 @@ import {useNavigate,useLocation} from 'react-router-dom'
 import { IoSearch } from "react-icons/io5";
 
 const Search = () => {
+  useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
     const navigate=useNavigate()
     const location=useLocation()
     const [keyword,setKeyword]=useState("")

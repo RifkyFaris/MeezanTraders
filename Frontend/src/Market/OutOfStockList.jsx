@@ -6,6 +6,10 @@ import { FaPen } from "react-icons/fa";
 import {Link} from 'react-router-dom'
 
 export default function OutOfStockList() {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
     const { low = [], loading = true, error }  = useSelector(state => state.productState)
     
     const setProducts = () => {

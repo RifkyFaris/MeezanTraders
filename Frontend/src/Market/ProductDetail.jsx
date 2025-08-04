@@ -8,6 +8,10 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom'
 
 export default function ProductDetail(){
+  useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
     const {product,loading}=useSelector((state)=>state.productState)
     const {items:cartItems}=useSelector(state=>state.cartState)
     const {isAuthenticated,user}=useSelector(state=>state.authState)
@@ -28,11 +32,6 @@ export default function ProductDetail(){
     useEffect(()=>{
         dispatch(getProduct(id))
     },[id,dispatch])
-    function getImageUrl(originalUrl) {
-    if (!originalUrl) return '';
-    const filename = originalUrl.split('/').pop();
-    return `https://meezantraders.onrender.com/proxy-image/${filename}`;
-  }
 
 
   return (
@@ -44,7 +43,7 @@ export default function ProductDetail(){
         
             <div className="image">
               
-              <img src={getImageUrl(product?.images?.[0]?.image)} className="productDetailImg"/>
+              <img src={product?.images?.[0]?.image } className="productDetailImg"/>
             </div>
             <div className="productdetails">
               <p className="pname">{product.name}</p>
@@ -73,6 +72,3 @@ export default function ProductDetail(){
     </Fragment>
   )
 }
-
-
-

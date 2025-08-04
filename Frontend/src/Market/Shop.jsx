@@ -10,6 +10,10 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom'
 
 const Shop = () => {
+  useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
   const dispatch=useDispatch();
   const {products,loading,error,productsCount,resPerPage}=useSelector((state)=>state.productsState)
   const {dairy}=useSelector((state)=>state.productsState)

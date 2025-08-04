@@ -10,6 +10,10 @@ import Search from './Search'
 import { FaShoppingCart } from "react-icons/fa";
 
 const ProducSearch = () => {
+  useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
     const dispatch=useDispatch();
     const {items:cartItems}=useSelector(state=>state.cartState)
       

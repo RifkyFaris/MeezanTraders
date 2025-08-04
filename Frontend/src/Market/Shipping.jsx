@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { saveShippingInfo } from "./slice/cartSlice"
 import { useNavigate } from "react-router-dom"
@@ -6,6 +6,10 @@ import { toast } from "react-toastify"
 import {Link} from 'react-router-dom'
 
 export const validateShipping = (shippingInfo, navigate) => {
+  useEffect(() => {
+        window.scrollTo(0, 0);
+        
+      },)
    
   if(!shippingInfo.address) {
           toast.error('Please fill the shipping information')

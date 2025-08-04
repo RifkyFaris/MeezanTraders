@@ -6,6 +6,10 @@ import { toast } from 'react-toastify';
 import { clearOrderUpdated, clearError } from './slice/orderSlice';
 
 const AdminUpdateOrder = () => {
+  useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
   const { loading, isOrderUpdated, error, orderDetail } = useSelector(state => state.orderState);
   const {
     user = {},

@@ -9,6 +9,10 @@ import {userOrders as userOrdersAction} from '../Market/actions/orderActions'
 import { Link } from "react-router-dom"
 
 const userOrders = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
     const { userOrders = []}  = useSelector(state => state.orderState)
 
     const dispatch = useDispatch();

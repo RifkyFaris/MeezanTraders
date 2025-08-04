@@ -7,6 +7,10 @@ import { clearError } from './slice/productsSlice.jsx'
 
 import {toast} from 'react-toastify'
 const NewProduct = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
     const [name,setName]=useState("");
     const[price,setPrice]=useState("");
     const[discount,setDiscount]=useState("");
@@ -26,13 +30,12 @@ const NewProduct = () => {
         'Food Cupboard',
         'Household',
         'Cooking Essentials',
-        'Bakery',
         'Frozen',
-        'Dry Fish',
         'Snacks',
-        'Seeds',
         'Spices',
-        'Health & Beauty'
+        'Health & Beauty',
+        'Private',
+        'Offer'
         
     ];
     const navigate=useNavigate();

@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function Product({ product }) {
+  useEffect(() => {
+        window.scrollTo(0, 0);
+        
+      },)
   const { isAuthenticated, user } = useSelector(state => state.authState);
   const canEditQty = isAuthenticated && (user.role === 'cashier' || user.role === 'admin');
 

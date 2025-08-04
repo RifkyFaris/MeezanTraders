@@ -3,7 +3,12 @@ import { useSelector,useDispatch } from "react-redux"
 import { createOrder } from './actions/orderActions.jsx'
 import { orderCompleted } from './slice/cartSlice.jsx'
 import { toast } from 'react-toastify'
+import { useEffect } from "react"
 const ConfirmOrder = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
     const navigate=useNavigate()
     const dispatch = useDispatch()
     const {shippingInfo,items:cartItems}=useSelector(state=>state.cartState)

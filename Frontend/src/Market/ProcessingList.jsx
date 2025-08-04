@@ -1,9 +1,13 @@
-import { Fragment } from 'react'
+import { Fragment,useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 import { MDBDataTable} from 'mdbreact';
 import { FaPen } from "react-icons/fa";
 import { Link } from "react-router-dom"
 const ProcessingList = () => {
+    useEffect(() => {
+          window.scrollTo(0, 0);
+          
+        },)
     const { process = [], loading = true, error, isOrderDeleted }  = useSelector(state => state.orderState)
 
     const dispatch = useDispatch();

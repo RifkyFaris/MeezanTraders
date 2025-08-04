@@ -6,10 +6,16 @@ import {lowstock,expiry as ex} from './actions/productActions'
 import { adminOrders as adminOrdersAction ,processingOrders} from './actions/orderActions';
 import {getUsers} from '../Profile/actions/userActions'
 
+import {getTodaysSales} from './actions/orderActions'
+
 const AdminDAshboard = () => {
+  useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
   const { products = [] } = useSelector( state => state.productState);
   const { low = [], expiry=[] } = useSelector( state => state.productState);
-  const { adminOrders = [],process=[] } = useSelector( state => state.orderState);
+  const { adminOrders = [],process=[],todaysOrders=[],totalSales  } = useSelector( state => state.orderState);
   const { users = [] } = useSelector( state => state.authState);
   let totalAmount = 0;
     if (adminOrders.length > 0) {
@@ -31,8 +37,9 @@ const AdminDAshboard = () => {
      
      dispatch(processingOrders());
      dispatch(ex())
-   
+   dispatch(getTodaysSales())
   }, [])
+  
   return (
     <div className='container'>
       <div className="hero1" >
@@ -80,7 +87,7 @@ const AdminDAshboard = () => {
           </div>
           <div className="col1_service">
             <Link className="service_list" to="/admin/orders">
-            <span className="no"> Sales </span> <br/>
+            <span className="no">Monthly Sales </span> <br/>
             <p className="quote">
               Rs. {totalAmount} <br />
               {adminOrders?.length} orders
@@ -106,6 +113,18 @@ const AdminDAshboard = () => {
             <span className="no">New Product</span><br/>
             
             </Link>
+          </div>
+          <div className="col1_service">
+            
+            <span className="no">Todays Sales </span> <br/>
+            <p className="quote">
+              Rs. {totalSales} <br />
+              {todaysOrders?.length} orders
+          
+              </p>
+           
+           
+            
           </div>
           
           

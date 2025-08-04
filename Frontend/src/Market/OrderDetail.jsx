@@ -4,6 +4,10 @@ import {  useParams } from 'react-router-dom';
 import {orderDetail as orderDetailAction} from './actions/orderActions'
 
 const OrderDetail = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      
+    },)
 
     const { orderDetail, loading } = useSelector(state => state.orderState)
     const { shippingInfo={}, user={}, orderStatus="Processing", orderItems=[], totalPrice=0, paymentInfo={} } = orderDetail;
