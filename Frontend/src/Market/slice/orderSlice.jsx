@@ -193,7 +193,6 @@ const orderSlice =createSlice({
             loading : false,
         error : action.payload}
         },
-        
     }
     })
     const { actions, reducer } = orderSlice;
@@ -226,6 +225,5 @@ const orderSlice =createSlice({
   getTodaysSalesSuccess,
   getTodaysSalesFail,
     }=actions;
-
 
     export default reducer;
