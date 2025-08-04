@@ -8,6 +8,12 @@ const OrderDetail = () => {
       window.scrollTo(0, 0);
       
     },)
+    // Convert original local URL to proxy URL
+  function getImageUrl(originalUrl) {
+    if (!originalUrl) return '';
+    const filename = originalUrl.split('/').pop();
+    return `https://meezantraders.onrender.com/proxy-image/${filename}`;
+  }
 
     const { orderDetail, loading } = useSelector(state => state.orderState)
     const { shippingInfo={}, user={}, orderStatus="Processing", orderItems=[], totalPrice=0, paymentInfo={} } = orderDetail;
@@ -48,7 +54,7 @@ const OrderDetail = () => {
 
                 <div className="cartdisplayitem">
                     
-                    <img src={item.image} className="cartitemimage"/>
+                    <img src={getImageUrl(item.image)} className="cartitemimage"/>
                     <p className="cartdisplayname">{item.name}</p>
                     <p className="cartdisplayprice">{item.quantity} Pieces  x Rs. {item.price} = <b>Rs. {item.quantity*item.price}</b></p>
                     
