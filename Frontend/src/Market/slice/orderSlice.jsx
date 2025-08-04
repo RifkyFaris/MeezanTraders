@@ -176,6 +176,23 @@ const orderSlice =createSlice({
             }
             
         },
+        getTodaysSalesRequest(state) {
+        return{...state,
+            loading : true,
+        error : null}
+        },
+        getTodaysSalesSuccess(state, action) {
+        return{...state,
+            loading : false,
+        todaysOrders : action.payload.orders,
+        totalSales : action.payload.totalSales}
+        },
+        getTodaysSalesFail(state, action) {
+        return{
+            ...state,
+            loading : false,
+        error : action.payload}
+        },
         
     }
     })
@@ -205,6 +222,10 @@ const orderSlice =createSlice({
         processingOrdersRequest,
         processingOrdersFail,
         processingOrdersSuccess,
+        getTodaysSalesRequest,
+  getTodaysSalesSuccess,
+  getTodaysSalesFail,
     }=actions;
+
 
     export default reducer;
