@@ -204,6 +204,7 @@ const placeAndPrintOrderHandler = async () => {
 
 
   <p className="profilebutton" onClick={checkOutHandler}>Cash On Delivery</p>
+  <Link to="/"><p className="profilebutton" onClick={checkOutHandler}>Continue Shopping</p></Link>
 
      
     </div>
