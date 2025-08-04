@@ -20,6 +20,11 @@ export default function cart(){
       window.scrollTo(0, 0);
       
     },)
+    function getImageUrl(originalUrl) {
+    if (!originalUrl) return '';
+    const filename = originalUrl.split('/').pop();
+    return `https://meezantraders.onrender.com/proxy-image/${filename}`;
+  }
   const orderStatus="Delivered"
   
       const {isAuthenticated,user}=useSelector(state=>state.authState)
@@ -159,7 +164,7 @@ const placeAndPrintOrderHandler = async () => {
 
         <div className="cartdisplayitem">
             
-            <img src={item.image} alt="" className="cartitemimage"/>
+            <img src={getImageUrl(item.image)} alt="" className="cartitemimage"/>
             <p className="cartdisplayname">{item.name}</p>
             <p className="cartdisplayprice">Rs.{item.price}</p>
             <div className="icons">
