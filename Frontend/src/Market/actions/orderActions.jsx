@@ -95,13 +95,14 @@ export const processingOrders = () => async (dispatch) => {
 export const getTodaysSales = () => async (dispatch) => {
   try {
     dispatch(getTodaysSalesRequest());
-    const { data } = await axios.get('/api/today/orders');
+    const { data } = await axios.get('https://meezantraders.onrender.com/api/today/orders',{ withCredentials: true });
     dispatch(getTodaysSalesSuccess(data));
   } catch (error) {
     const message = error.response?.data?.message || error.message || "Something went wrong";
     dispatch(getTodaysSalesFail(message));
   }
 };
+
 
 
 
