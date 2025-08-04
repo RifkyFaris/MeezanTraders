@@ -3,16 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const orderSlice =createSlice({
     name:'order',
     initialState:{
-        orderDetail: {},
-    userOrders: [],
-    adminOrders: [],
-    process: [],
-    todaysOrders: [],
-    totalSales: 0,
-    isOrderDeleted: false,
-    isOrderUpdated: false,
-    loading: false,
-    error: null,
+        orderDetail:{},
+        
+        isOrderDeleted:false,
+        isOrderUpdated:false,
 
         
     },

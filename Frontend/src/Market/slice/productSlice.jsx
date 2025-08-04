@@ -6,8 +6,6 @@ const productSlice=createSlice({
     initialState:{
         loading:false,
         product:{},
-        products: [], // <-- add this
-  expiry: {},
         isProductCreated:false,
         isProductDeleted:false,
         isProductUpdated:false,
@@ -31,7 +29,6 @@ const productSlice=createSlice({
         },
         newProductFail(state, action){
             return {
-                ...state,
                 loading: false,
                 error:  action.payload,
                 isProductCreated:false
@@ -46,13 +43,11 @@ const productSlice=createSlice({
         
         productRequest(state, action){
             return {
-                ...state,
                 loading: true
             }
         },
         productSuccess(state, action){
             return {
-                ...state,
                 loading: false,
                 product: action.payload.product
                 
@@ -60,7 +55,6 @@ const productSlice=createSlice({
         },
         productFail(state, action){
             return {
-                ...state,
                 loading: false,
                 error:  action.payload
             }
@@ -68,13 +62,11 @@ const productSlice=createSlice({
         
         adminProductRequest(state, action){
             return {
-                ...state,
                 loading: true
             }
         },
         adminProductSuccess(state, action){
             return {
-                ...state,
                 loading: false,
                 products: action.payload.products
                 
@@ -82,7 +74,6 @@ const productSlice=createSlice({
         },
         adminProductFail(state, action){
             return {
-                ...state,
                 loading: false,
                 error:  action.payload
             }
@@ -132,7 +123,6 @@ const productSlice=createSlice({
         },
         updateProductFail(state, action){
             return {
-                ...state,
                 loading: false,
                 error:  action.payload,
                 isProductCreated:false
