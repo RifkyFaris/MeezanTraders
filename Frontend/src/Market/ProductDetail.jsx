@@ -23,6 +23,7 @@ export default function ProductDetail(){
         if (product.stock === 0 || quantity >= product.stock) return;
         setQuantity((prevQty) => prevQty + 1);
     };
+
     
     const decreaseQty = () => {
         if (quantity <= 1) return;
@@ -32,6 +33,12 @@ export default function ProductDetail(){
     useEffect(()=>{
         dispatch(getProduct(id))
     },[id,dispatch])
+     // Convert original local URL to proxy URL
+  function getImageUrl(originalUrl) {
+    if (!originalUrl) return '';
+    const filename = originalUrl.split('/').pop();
+    return `https://meezantraders.onrender.com/proxy-image/${filename}`;
+  }
 
 
   return (
@@ -43,7 +50,7 @@ export default function ProductDetail(){
         
             <div className="image">
               
-              <img src={product?.images?.[0]?.image } className="productDetailImg"/>
+              <img src={getImageUrl(product?.images?.[0]?.image) } className="productDetailImg"/>
             </div>
             <div className="productdetails">
               <p className="pname">{product.name}</p>
