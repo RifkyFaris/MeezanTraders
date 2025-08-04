@@ -6,6 +6,8 @@ const productSlice=createSlice({
     initialState:{
         loading:false,
         product:{},
+        products: [], // <-- add this
+  expiry: {},
         isProductCreated:false,
         isProductDeleted:false,
         isProductUpdated:false,
