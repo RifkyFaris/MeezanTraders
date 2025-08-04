@@ -88,6 +88,8 @@ exports.logoutUser=(req,res,next)=>{
     res.cookie('token',null,{
         expires:new Date(Date.now()),
         httpOnly:true,
+        secure: true,            // ✅ important for cross-site cookies
+        sameSite: "None",
     })
     .status(200).json({
         success:true,
