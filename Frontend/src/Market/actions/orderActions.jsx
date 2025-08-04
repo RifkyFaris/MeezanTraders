@@ -20,7 +20,10 @@ import { createOrderRequest,
     updateOrdersSuccess,
     processingOrdersRequest,
     processingOrdersSuccess,
-    processingOrdersFail
+    processingOrdersFail,
+    getTodaysSalesRequest,
+  getTodaysSalesSuccess,
+  getTodaysSalesFail,
 
 } from '../slice/orderSlice';
 
@@ -89,5 +92,16 @@ export const processingOrders = () => async (dispatch) => {
     dispatch(processingOrdersFail(message));
   }
 };
+export const getTodaysSales = () => async (dispatch) => {
+  try {
+    dispatch(getTodaysSalesRequest());
+    const { data } = await axios.get('/api/today/orders');
+    dispatch(getTodaysSalesSuccess(data));
+  } catch (error) {
+    const message = error.response?.data?.message || error.message || "Something went wrong";
+    dispatch(getTodaysSalesFail(message));
+  }
+};
+
 
 
