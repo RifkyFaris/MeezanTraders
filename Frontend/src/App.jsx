@@ -78,9 +78,7 @@ function App() {
           <Route path='/admin/expired' element={<ProtectedRoute isAdmin={true}><ExpiredList/></ProtectedRoute> } />
           <Route path='/admin/processing' element={<ProtectedRoute isAdmin={true}><ProcessingList/></ProtectedRoute> } />
 
-        </Routes>
-
-        <Routes>
+        
           {/* Profile routes */}
           <Route path="/login" element={<Login/>}/>
           <Route path="/update/profile" element={<ProtectedRoute><UpdateProfile/></ProtectedRoute>}/>
