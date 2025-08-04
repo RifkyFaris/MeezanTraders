@@ -6,7 +6,8 @@ const {newOrder,
     orders,
     updateOrder,
     deleteOrder,
-    getProcessingOrders
+    getProcessingOrders,
+    getTodaysSales
 }=require("../../controllers/MarketController/orderController.js")
 const {isAuthenticatedUser,authorizeRoles}=require('../../middlewares/authenticate.js')
 
@@ -19,7 +20,7 @@ router.route('/api/admin/orders').get(isAuthenticatedUser,authorizeRoles('admin'
 router.route('/api/admin/order/:id').put(isAuthenticatedUser,authorizeRoles('admin'),updateOrder);
 
 router.route('/api/admin/delete/order/:id').delete(isAuthenticatedUser,authorizeRoles('admin'),deleteOrder);
-
+router.route('/api/today/orders').get(isAuthenticatedUser,authorizeRoles('admin'),getTodaysSales);
 
 
 

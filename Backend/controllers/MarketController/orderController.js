@@ -109,6 +109,68 @@ exports.getProcessingOrders = async (req, res, next) => {
   
 };
 
+exports.getTodaysSales = async (req, res, next) => {
+  try {
+    // Get today's date at 00:00:00 (start of the day)
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+
+    // Get tomorrow's date at 00:00:00 (start of next day)
+    const endOfDay = new Date();
+    
+    endOfDay.setHours(23, 59, 59, 999);const now = new Date();
+
+// Get Sri Lanka's local date
+const srilankaOffset = 5 * 60; // in minutes
+const localNow = new Date(now.getTime() + srilankaOffset * 60 * 1000);
+
+// Create start and end of day in Sri Lanka time, then convert to UTC for MongoDB
+const startOfDaySL = new Date(Date.UTC(
+  localNow.getUTCFullYear(),
+  localNow.getUTCMonth(),
+  localNow.getUTCDate(),
+  0, 0, 0
+));
+
+const endOfDaySL = new Date(Date.UTC(
+  localNow.getUTCFullYear(),
+  localNow.getUTCMonth(),
+  localNow.getUTCDate(),
+  23, 59, 59, 999
+));
+
+    // Find orders created between startOfDay and endOfDay
+    const todaysOrders = await Order.find({
+      createdAt: { $gte: startOfDaySL, $lte: endOfDaySL },
+    });
+
+    // Calculate total sales amount for today
+    let totalSales = 0;
+    todaysOrders.forEach((order) => {
+      totalSales += order.totalPrice;
+    });
+
+    res.status(200).json({
+      success: true,
+      totalSales,
+      orders: todaysOrders,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+exports.deleteAllOrders = async (req, res, next) => {
+  try {
+    await Order.deleteMany({});
+    res.status(200).json({
+      success: true,
+      message: "All orders have been deleted.",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 
 
