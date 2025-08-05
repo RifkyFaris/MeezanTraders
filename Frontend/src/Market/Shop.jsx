@@ -1,7 +1,7 @@
 import {Fragment,useEffect,useState}  from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import {getDairy,getBeverages,getRice,getBakery,getHouse,getFood,getCooking,getSnacks,getSpices,getHealth} from './actions/productActions.jsx'
-
+import Loader from '../components/Loader.jsx'
 import {toast} from 'react-toastify'
 import Pagination from 'react-js-pagination'
 import Search from './Search'
@@ -47,7 +47,7 @@ const Shop = () => {
   
   
   return (
-    <Fragment>
+    loading ? (<Loader/>):(<Fragment>
     <div className='container'>
       
       
@@ -185,7 +185,7 @@ const Shop = () => {
         </div>
       </div>
     </div>
-    </Fragment>
+    </Fragment>)
   )
 }
 
