@@ -15,6 +15,7 @@ const Shop = () => {
       
     },)
   const dispatch=useDispatch();
+  let hasVisitedShop = false;
   const {products,loading,error,productsCount,resPerPage}=useSelector((state)=>state.productsState)
   const {dairy}=useSelector((state)=>state.productsState)
   const {beverages}=useSelector((state)=>state.productsState)
@@ -27,7 +28,7 @@ const Shop = () => {
    const {health}=useSelector((state)=>state.productsState)
    const {spices}=useSelector((state)=>state.productsState)
   const {items:cartItems}=useSelector(state=>state.cartState)
-  const [firstLoad, setFirstLoad] = useState(true);
+  const [firstLoad, setFirstLoad] = useState(() => !hasVisitedShop);
 
  
   
@@ -46,12 +47,14 @@ const Shop = () => {
    dispatch(getHealth())
    
   },[dispatch])
-  useEffect(() => {
-    if (!loading && firstLoad) {
-      setFirstLoad(false);
-    }
-  }, [loading, firstLoad]);
-  if (firstLoad || loading) return <Loader />;
+ useEffect(() => {
+  if (!loading && firstLoad) {
+    setFirstLoad(false);
+    hasVisitedShop = true; // ✅ Prevent loader on future visits
+  }
+}, [loading, firstLoad]);
+
+if (firstLoad || loading) return <Loader />;
   
   return (
     <Fragment>
