@@ -16,7 +16,7 @@ const Shop = () => {
       
     },)
   const dispatch=useDispatch();
-  const hasVisitedShop = useSelector(state => state.product.hasVisitedShop);
+  const hasVisitedShop = useSelector(state => state.productState);
 
   const {products,loading,error,productsCount,resPerPage}=useSelector((state)=>state.productsState)
   const {dairy}=useSelector((state)=>state.productsState)
@@ -200,4 +200,5 @@ const Shop = () => {
 }
 
 export default Shop
+
 
