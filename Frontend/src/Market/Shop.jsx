@@ -1,24 +1,23 @@
 import {Fragment,useEffect,useState}  from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import {getDairy,getBeverages,getRice,getBakery,getHouse,getFood,getCooking,getSnacks,getSpices,getHealth} from './actions/productActions.jsx'
-import Loader from '../components/Loader.jsx'
+import { setVisitedShop } from './reducers/productSlice'; // Adjust path as needed
+import Loader from '../components/Loader.jsx';
 import {toast} from 'react-toastify'
 import Pagination from 'react-js-pagination'
 import Search from './Search'
 import Product from './Product.jsx'
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom'
-const VISITED_FLAG_KEY = 'hasVisitedShop';
+
 const Shop = () => {
   useEffect(() => {
       window.scrollTo(0, 0);
       
     },)
-  const hasVisitedShop = sessionStorage.getItem(VISITED_FLAG_KEY) === 'true';
-
-  // Show loader only if first time visiting
-  const [firstLoad, setFirstLoad] = useState(() => !hasVisitedShop);
   const dispatch=useDispatch();
+  const hasVisitedShop = useSelector(state => state.product.hasVisitedShop);
+
   const {products,loading,error,productsCount,resPerPage}=useSelector((state)=>state.productsState)
   const {dairy}=useSelector((state)=>state.productsState)
   const {beverages}=useSelector((state)=>state.productsState)
@@ -31,7 +30,14 @@ const Shop = () => {
    const {health}=useSelector((state)=>state.productsState)
    const {spices}=useSelector((state)=>state.productsState)
   const {items:cartItems}=useSelector(state=>state.cartState)
+  const [firstLoad, setFirstLoad] = useState(() => !hasVisitedShop);
 
+  useEffect(() => {
+    if (!loading && firstLoad) {
+      setFirstLoad(false);
+      dispatch(setVisitedShop());
+    }
+  }, [loading, firstLoad, dispatch]);
  
   
 
@@ -47,16 +53,8 @@ const Shop = () => {
   dispatch(getSnacks())
    dispatch(getSpices())
    dispatch(getHealth())
-   
   },[dispatch])
-  useEffect(() => {
-    if (!loading && firstLoad) {
-      setFirstLoad(false);
-      sessionStorage.setItem(VISITED_FLAG_KEY, 'true');
-
-
-    }
-  }, [loading, firstLoad]);
+  
   if (firstLoad || loading) return <Loader />;
   return (
     <Fragment>
