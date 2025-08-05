@@ -10,12 +10,8 @@ const productSlice=createSlice({
         isProductDeleted:false,
         isProductUpdated:false,
         low:{},
-        hasVisitedShop: false, 
     },
     reducers:{
-        setVisitedShop(state) {
-      state.hasVisitedShop = true;
-    },
         newProductRequest(state,action){
             return{
                 ...state,
@@ -218,7 +214,6 @@ export const{
     expiryFail,
     expirySuccess,
     expirykRequest,
-    setVisitedShop
 
 
 }=actions;
