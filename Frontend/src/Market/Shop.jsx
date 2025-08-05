@@ -27,7 +27,8 @@ const Shop = () => {
    const {health}=useSelector((state)=>state.productsState)
    const {spices}=useSelector((state)=>state.productsState)
   const {items:cartItems}=useSelector(state=>state.cartState)
-  
+  const [firstLoad, setFirstLoad] = useState(true);
+
  
   
 
@@ -43,11 +44,17 @@ const Shop = () => {
   dispatch(getSnacks())
    dispatch(getSpices())
    dispatch(getHealth())
+   
   },[dispatch])
-  
+  useEffect(() => {
+    if (!loading && firstLoad) {
+      setFirstLoad(false);
+    }
+  }, [loading, firstLoad]);
+  if (firstLoad || loading) return <Loader />;
   
   return (
-    loading ? (<Loader/>):(<Fragment>
+    <Fragment>
     <div className='container'>
       
       
@@ -185,7 +192,7 @@ const Shop = () => {
         </div>
       </div>
     </div>
-    </Fragment>)
+    </Fragment>
   )
 }
 
