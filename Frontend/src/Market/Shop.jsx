@@ -8,14 +8,17 @@ import Search from './Search'
 import Product from './Product.jsx'
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom'
-
+const VISITED_FLAG_KEY = 'hasVisitedShop';
 const Shop = () => {
   useEffect(() => {
       window.scrollTo(0, 0);
       
     },)
+  const hasVisitedShop = sessionStorage.getItem(VISITED_FLAG_KEY) === 'true';
+
+  // Show loader only if first time visiting
+  const [firstLoad, setFirstLoad] = useState(() => !hasVisitedShop);
   const dispatch=useDispatch();
-  let hasVisitedShop = false;
   const {products,loading,error,productsCount,resPerPage}=useSelector((state)=>state.productsState)
   const {dairy}=useSelector((state)=>state.productsState)
   const {beverages}=useSelector((state)=>state.productsState)
@@ -28,7 +31,6 @@ const Shop = () => {
    const {health}=useSelector((state)=>state.productsState)
    const {spices}=useSelector((state)=>state.productsState)
   const {items:cartItems}=useSelector(state=>state.cartState)
-  const [firstLoad, setFirstLoad] = useState(() => !hasVisitedShop);
 
  
   
@@ -47,15 +49,15 @@ const Shop = () => {
    dispatch(getHealth())
    
   },[dispatch])
- useEffect(() => {
-  if (!loading && firstLoad) {
-    setFirstLoad(false);
-    hasVisitedShop = true; // ✅ Prevent loader on future visits
-  }
-}, [loading, firstLoad]);
+  useEffect(() => {
+    if (!loading && firstLoad) {
+      setFirstLoad(false);
+      sessionStorage.setItem(VISITED_FLAG_KEY, 'true');
 
-if (firstLoad) return <Loader />;
-  
+
+    }
+  }, [loading, firstLoad]);
+  if (firstLoad || loading) return <Loader />;
   return (
     <Fragment>
     <div className='container'>
