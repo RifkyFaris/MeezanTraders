@@ -1,7 +1,7 @@
 import {Fragment,useEffect,useState}  from 'react'
 import {useDispatch,useSelector} from 'react-redux'
 import {getDairy,getBeverages,getRice,getBakery,getHouse,getFood,getCooking,getSnacks,getSpices,getHealth} from './actions/productActions.jsx'
-import { setVisitedShop } from './reducers/productSlice'; // Adjust path as needed
+import { setVisitedShop } from './slice/productSlice'; 
 import Loader from '../components/Loader.jsx';
 import {toast} from 'react-toastify'
 import Pagination from 'react-js-pagination'
@@ -200,3 +200,4 @@ const Shop = () => {
 }
 
 export default Shop
+
