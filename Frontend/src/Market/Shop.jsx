@@ -54,7 +54,7 @@ const Shop = () => {
   }
 }, [loading, firstLoad]);
 
-if (firstLoad || loading) return <Loader />;
+if (firstLoad) return <Loader />;
   
   return (
     <Fragment>
