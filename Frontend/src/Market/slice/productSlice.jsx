@@ -9,9 +9,13 @@ const productSlice=createSlice({
         isProductCreated:false,
         isProductDeleted:false,
         isProductUpdated:false,
-        low:{}
+        low:{},
+        hasVisitedShop: false, 
     },
     reducers:{
+        setVisitedShop(state) {
+      state.hasVisitedShop = true;
+    },
         newProductRequest(state,action){
             return{
                 ...state,
@@ -29,7 +33,6 @@ const productSlice=createSlice({
         },
         newProductFail(state, action){
             return {
-                ...state,
                 loading: false,
                 error:  action.payload,
                 isProductCreated:false
@@ -44,13 +47,11 @@ const productSlice=createSlice({
         
         productRequest(state, action){
             return {
-                ...state,
                 loading: true
             }
         },
         productSuccess(state, action){
             return {
-                ...state,
                 loading: false,
                 product: action.payload.product
                 
@@ -58,7 +59,6 @@ const productSlice=createSlice({
         },
         productFail(state, action){
             return {
-                ...state,
                 loading: false,
                 error:  action.payload
             }
@@ -66,13 +66,11 @@ const productSlice=createSlice({
         
         adminProductRequest(state, action){
             return {
-                ...state,
                 loading: true
             }
         },
         adminProductSuccess(state, action){
             return {
-                ...state,
                 loading: false,
                 products: action.payload.products
                 
@@ -80,7 +78,6 @@ const productSlice=createSlice({
         },
         adminProductFail(state, action){
             return {
-                ...state,
                 loading: false,
                 error:  action.payload
             }
@@ -130,7 +127,6 @@ const productSlice=createSlice({
         },
         updateProductFail(state, action){
             return {
-                ...state,
                 loading: false,
                 error:  action.payload,
                 isProductCreated:false
@@ -221,8 +217,8 @@ export const{
     lowStockRequest,
     expiryFail,
     expirySuccess,
-    expirykRequest
-    
+    expirykRequest,
+    setVisitedShop
 
 
 }=actions;
